@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../src/assets/logo.svg"
 import useAuth from "../hooks/useAuth";
+import Swal from "sweetalert2";
 
 
 const Navbar = () => {
@@ -10,7 +11,7 @@ const Navbar = () => {
     const handleToggleOpen = ()=>{
         setIsOpen(!isOpen)
     } 
- const {user} = useAuth() || {}
+ const {user,  signOutUser} = useAuth() || {}
    
     
     const handleTheme = (event) => {
@@ -21,6 +22,16 @@ const Navbar = () => {
           setTheme("light");
           localStorage.setItem("theme", "light");
         }
+      };
+
+      const handleSignOut = () => {
+        signOutUser().then(() => {
+          Swal.fire({
+            title: "Congratulations!",
+            text: "Sign Out Successful",
+            icon: "success",
+          });
+        });
       };
     
       useEffect(() => {
@@ -88,7 +99,7 @@ const Navbar = () => {
                 
                 
                 {
-                    user? <button type="button" className="px-4 py-2 font-semibold border bg-primary text-white rounded  ">Sign Out</button> : <Link to="/login" className="my-2 text-gray-700 transition-colors duration-300 transform dark:text-gray-200 hover:text-[#6A38C2] dark:hover:text-blue-400 md:mx-4 md:my-0 ">
+                    user? <button onClick={handleSignOut} type="button" className="px-4 py-2 font-semibold border bg-primary text-white rounded  ">Sign Out</button> : <Link to="/login" className="my-2 text-gray-700 transition-colors duration-300 transform dark:text-gray-200 hover:text-[#6A38C2] dark:hover:text-blue-400 md:mx-4 md:my-0 ">
                     <button type="button" className="px-4 py-2 font-semibold border bg-primary text-white rounded  ">Sign In</button>
                     </Link>
                 }
