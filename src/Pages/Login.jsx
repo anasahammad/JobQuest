@@ -71,7 +71,7 @@ const Login = () => {
                     <div className="container flex flex-col items-center justify-center min-h-screen px-6 mx-auto">
         <form onSubmit={handleSubmit(handleSignIn)} className="w-full max-w-md">
             
-            <h1 className="mt-3 text-center text-2xl font-semibold text-gray-800 capitalize sm:text-3xl dark:text-white">Sign In</h1>
+            <h1 className="mt-3 text-center text-2xl font-semibold  capitalize sm:text-3xl dark:text-white">Sign In</h1>
 
             <div className="relative flex items-center mt-8">
                 <span className="absolute">
@@ -108,7 +108,7 @@ const Login = () => {
             </div>
         </form>
         <div>
-                <p className="mt-4 text-center text-gray-600 dark:text-gray-400">or sign in with</p>
+                <p className="mt-4 text-center ">or sign in with</p>
 
 <button onClick={handleGoogle}  className="flex w-full items-center justify-center px-6 py-3 mt-4 text-gray-600 transition-colors duration-300 transform border rounded-lg dark:border-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
     <svg className="w-6 h-6 mx-2" viewBox="0 0 40 40">

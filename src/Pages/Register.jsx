@@ -56,7 +56,7 @@ const Register = () => {
             <form onSubmit={handleSubmit(handleForm)} className="w-full max-w-md">
                 
                 
-            <h1 className="mt-3 text-center text-2xl font-semibold text-gray-800 capitalize sm:text-3xl dark:text-white">Sign Up</h1>
+            <h1 className="mt-3 text-center text-2xl font-semibold  capitalize sm:text-3xl dark:text-white">Sign Up</h1>
     
                 <div className="relative flex items-center mt-8">
                     <span className="absolute">
