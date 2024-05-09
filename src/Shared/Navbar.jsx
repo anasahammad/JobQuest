@@ -16,8 +16,8 @@ const Navbar = () => {
     
     const handleTheme = (event) => {
         if (event.target.checked) {
-          setTheme("dark");
-          localStorage.setItem("theme", "dark");
+          setTheme("synthwave");
+          localStorage.setItem("theme", "synthwave");
         } else {
           setTheme("light");
           localStorage.setItem("theme", "light");
@@ -39,7 +39,7 @@ const Navbar = () => {
         document.querySelector("html").setAttribute("data-theme", localTheme);
       }, [theme]);
     return (
-        <nav  className="relative  shadow dark:bg-gray-800">
+        <nav  className="relative  shadow">
     <div className="container px-6 py-4 mx-auto md:flex md:justify-between md:items-center">
         <div className="flex items-center justify-between">
             <Link to="/" className="flex gap-3">
@@ -58,7 +58,7 @@ const Navbar = () => {
             <label className="swap swap-rotate mr-3">
   
   {/* this hidden checkbox controls the state */}
-  <input   checked={theme === "dark"}
+  <input  checked={theme === "synthwave"}
             type="checkbox"
             onChange={handleTheme}
             className=" theme-controller" />
@@ -87,12 +87,12 @@ const Navbar = () => {
         </div>
 
         {/* <!-- Mobile Menu open: "block", Menu closed: "hidden" --> */}
-        <div  className={`absolute inset-x-0 z-20 w-full px-6 py-4 transition-all duration-300 ease-in-out bg-white dark:bg-gray-800 md:mt-0 md:p-0 md:top-0 md:relative md:bg-transparent md:w-auto md:opacity-100 md:translate-x-0 md:flex md:items-center ${isOpen ? 'block' : 'hidden'}`}>
+        <div  className={`absolute inset-x-0 z-20 w-full px-6 py-4 transition-all duration-300 ease-in-out z-[50] dark:bg-gray-800 md:mt-0 md:p-0 md:top-0 md:relative md:bg-transparent md:w-auto md:opacity-100 md:translate-x-0 md:flex md:items-center ${isOpen ? 'block' : 'hidden'}`}>
           
             <div className="flex flex-col md:items-center md:flex-row md:mx-6">
-                <Link to="/" className="my-2 text-gray-700 transition-colors duration-300 transform dark:text-gray-200 hover:text-[#6A38C2] dark:hover:text-blue-400 md:mx-4 md:my-0">Home</Link>
-                <Link to="/all-jobs" className="my-2 text-gray-700 transition-colors duration-300 transform dark:text-gray-200 hover:text-[#6A38C2] dark:hover:text-blue-400 md:mx-4 md:my-0">All Jobs</Link>
-                <Link to="/add-job" className="my-2 text-gray-700 transition-colors duration-300 transform dark:text-gray-200 hover:text-[#6A38C2] dark:hover:text-blue-400 md:mx-4 md:my-0">Add A Job</Link>
+                <Link to="/" className="my-2   transition-colors duration-300 transform hover:text-[#6A38C2] dark:hover:text-blue-400 md:mx-4 md:my-0">Home</Link>
+                <Link to="/all-jobs" className="my-2  transition-colors duration-300 transform dark:text-gray-200 hover:text-[#6A38C2] dark:hover:text-blue-400 md:mx-4 md:my-0">All Jobs</Link>
+                <Link to="/add-job" className="my-2  transition-colors duration-300 transform dark:text-gray-200 hover:text-[#6A38C2] dark:hover:text-blue-400 md:mx-4 md:my-0">Add A Job</Link>
                
                
                 
@@ -103,11 +103,11 @@ const Navbar = () => {
                     user?
                     <>
                     
-                    <Link to="/my-jobs" className="my-2 text-gray-700 transition-colors duration-300 transform dark:text-gray-200 hover:text-[#6A38C2] dark:hover:text-blue-400 md:mx-4 md:my-0">My Jobs</Link>
+                    <Link to="/my-jobs" className="my-2  transition-colors duration-300 transform dark:text-gray-200 hover:text-[#6A38C2] dark:hover:text-blue-400 md:mx-4 md:my-0">My Jobs</Link>
                     <button onClick={handleSignOut} type="button" className="px-4 py-2 font-semibold border bg-primary text-white rounded  ">Sign Out</button>
                     </>
                     
-                   : <Link to="/login" className="my-2 text-gray-700 transition-colors duration-300 transform dark:text-gray-200 hover:text-[#6A38C2] dark:hover:text-blue-400 md:mx-4 md:my-0 ">
+                   : <Link to="/login" className="my-2  transition-colors duration-300 transform dark:text-gray-200 hover:text-[#6A38C2] dark:hover:text-blue-400 md:mx-4 md:my-0 ">
                     <button type="button" className="px-4 py-2 font-semibold border bg-primary text-white rounded  ">Sign In</button>
                     </Link>
                 }
@@ -129,7 +129,7 @@ const Navbar = () => {
             <label className="swap swap-rotate ">
   
   {/* this hidden checkbox controls the state */}
-  <input checked={theme === "dark"}
+  <input checked={theme === "synthwave"}
             type="checkbox"
             onChange={handleTheme} className="theme-controller "  />
   
