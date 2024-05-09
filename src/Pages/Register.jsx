@@ -1,8 +1,51 @@
 import Lottie from "lottie-react";
 import registerAnimation from "../assets/registration.json"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
+import { useForm } from "react-hook-form";
+import { updateProfile } from "firebase/auth";
+import Swal from "sweetalert2";
 
 const Register = () => {
+    const { createUser} = useAuth()
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+      } = useForm()
+      const navigate = useNavigate()
+
+
+      const handleForm = data =>{
+        const {email, password, name, photoURL} = data;
+            const user = {name, email, password, photoURL};
+            console.log(user);
+            createUser(email, password)
+            .then(result=> {
+                updateProfile(result.user, {
+                    displayName: name,
+                    photoURL: photoURL
+                  })
+                  .then(()=>{
+                    Swal.fire({
+                        title: "Congratulations",
+                        text: "Account Registration Successful",
+                        icon: "success"
+                      });
+                      navigate("/")
+                  })
+                
+                 
+            })
+            .catch(error=> {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: `${error.message.replace('Firebase: Error (auth/', ' ').replace(/\)/, '')}`,
+                    footer: '<a href="#">Why do I have this issue?</a>'
+                  });
+            })
+      }
     return (
         <section className="  container mx-auto dark:bg-gray-900">
         <div className="flex flex-col md:flex-row">
@@ -10,7 +53,7 @@ const Register = () => {
                     <Lottie className=" " loop={true} animationData={registerAnimation} />
                     </div>
                     <div className="container flex-1 flex items-center justify-center min-h-screen px-6 mx-auto ">
-            <form className="w-full max-w-md">
+            <form onSubmit={handleSubmit(handleForm)} className="w-full max-w-md">
                 
                 
             <h1 className="mt-3 text-center text-2xl font-semibold text-gray-800 capitalize sm:text-3xl dark:text-white">Sign Up</h1>
@@ -22,9 +65,12 @@ const Register = () => {
                         </svg>
                     </span>
     
-                    <input type="text" className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Username"/>
+                    <input {...register('name', {
+            required: true
+          })} type="text" className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Full Name"/>
+          
                 </div>
-    
+                {errors.name && <span className="text-red-600">This name is required to sign up</span>}
                
                 
                     <div className="relative flex items-center mt-6">
@@ -34,7 +80,7 @@ const Register = () => {
                     </svg>
                     </span>
     
-                    <input type="text" className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Photo URL"/>
+                    <input {...register("photoURL")} type="text" className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Photo URL"/>
                 </div>
     
                 <div className="relative flex items-center mt-6">
@@ -44,8 +90,10 @@ const Register = () => {
                         </svg>
                     </span>
     
-                    <input type="email" className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Email address"/>
+                    <input {...register("email", { required: true })} type="email" className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Email address"/>
+                    
                 </div>
+                {errors.email && <span className="text-red-600 block">This email is required to sign up</span>}
     
                 <div className="relative flex items-center mt-4">
                     <span className="absolute">
@@ -54,9 +102,24 @@ const Register = () => {
                         </svg>
                     </span>
     
-                    <input type="password" className="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Password"/>
+                    <input 
+                    
+                    {...register("password", {
+                     required: "Password is required", 
+                     minLength: {
+                       value: 6, 
+                       message: "Password must be at least 6 characters"
+                     }, 
+                     validate: {
+                       upperCase: (value)=> /[A-Z]/.test(value) || "Password must have  at least one UpperCase letter", 
+                       lowerCase: (value)=> /[a-z]/.test(value) || "Password must have  at least one LowerCase letter" 
+         
+                     }
+                   })}
+                    type="password" className="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Password"/>
+                     
                 </div>
-    
+                {errors.password && <span className="text-red-600">{errors.password.message}</span>}
                
     
                 <div className="mt-6">
