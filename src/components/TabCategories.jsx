@@ -4,7 +4,9 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-
+import JobCard from "./JobCard";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -41,64 +43,106 @@ function a11yProps(index) {
 
 export default function TabCategories() {
   const [value, setValue] = React.useState(0);
- 
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
-  return (
-    <div className=" container px-4 mx-auto ">
+  //fetching data using tanstack query
+  const { isPending, data: jobs } = useQuery({
+    queryKey: ["jobs"],
+    queryFn: async () => {
+      const res = await axios("http://localhost:5000/jobs");
+      return res.data;
+    },
+  });
+  if (isPending) return <p>The job is pending</p>;
 
-        <div className="text-center">
-            <h1 className="text-3xl font-bold">Browse Jobs By Categories</h1>
-            <p className="my-4">Explore jobs by the categories of On site, Remote, Hybrid and Part time job.</p>
-        </div>
-        <div className="flex justify-center items-center">
+  return (
+    <div className="  px-4 mx-auto ">
+      <div className="text-center">
+        <h1 className="text-3xl font-bold">Browse Jobs By Categories</h1>
+        <p className="my-4">
+          Explore jobs by the categories of On site, Remote, Hybrid and Part
+          time job.
+        </p>
+      </div>
+      <div className="flex justify-center items-center">
         <Box sx={{ width: "100%", margin: "0 auto" }}>
-      <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-        <Tabs className="overflow-x-auto"
-          centered
-          value={value}
-          onChange={handleChange}
-          aria-label="basic tabs example"
-          variant={window.innerWidth <= 328 ? "scrollable" : "standard"}
-         scrollButtons="auto"
-        >
-          <Tab label="On-Site Job" {...a11yProps(0)} />
-          <Tab
-            label="Remote Job
+          <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+            <Tabs
+              className="overflow-x-auto"
+              centered
+              value={value}
+              onChange={handleChange}
+              aria-label="basic tabs example"
+              variant={window.innerWidth <= 328 ? "scrollable" : "standard"}
+              scrollButtons="auto"
+            >
+              <Tab label="On-Site Job" {...a11yProps(0)} />
+              <Tab
+                label="Remote Job
 "
-            {...a11yProps(1)}
-          />
-          <Tab
-            label="Hybrid
+                {...a11yProps(1)}
+              />
+              <Tab
+                label="Hybrid
 "
-            {...a11yProps(2)}
-          />
-          <Tab  
-            label="Part-Time
+                {...a11yProps(2)}
+              />
+              <Tab
+                label="Part-Time
 "
-            {...a11yProps(3)}
-          />
-        </Tabs>
-      </Box>
-      <CustomTabPanel value={value} index={0}>
-        Item One
-      </CustomTabPanel>
-      <CustomTabPanel value={value} index={1}>
-        Item Two
-      </CustomTabPanel>
-      <CustomTabPanel value={value} index={2}>
-        Item Three
-      </CustomTabPanel>
-      <CustomTabPanel value={value} index={3}>
-        Item Four
-      </CustomTabPanel>
-    </Box>
-        </div>
- 
+                {...a11yProps(3)}
+              />
+              <Tab
+                label="All Jobs
+"
+                {...a11yProps(4)}
+              />
+            </Tabs>
+          </Box>
+          <CustomTabPanel value={value} index={0}>
+            <div className="grid grid-cols-1 gap-3  md:grid-cols-2 lg:grid-cols-3">
+              {jobs
+                .filter((job) => job.category === "On Site")
+                .map((job) => (
+                  <JobCard key={job._id} job={job} />
+                ))}
+            </div>
+          </CustomTabPanel>
+          <CustomTabPanel value={value} index={1}>
+            <div className="grid grid-cols-1 gap-3  md:grid-cols-2 lg:grid-cols-3">
+              {jobs
+                .filter((job) => job.category === "Remote")
+                .map((job) => (
+                  <JobCard key={job._id} job={job} />
+                ))}
+            </div>
+          </CustomTabPanel>
+          <CustomTabPanel value={value} index={2}>
+            <div className="grid grid-cols-1 gap-3  md:grid-cols-2 lg:grid-cols-3">
+              {jobs
+                .filter((job) => job.category === "Part Time")
+                .map((job) => (
+                  <JobCard key={job._id} job={job} />
+                ))}
+            </div>
+          </CustomTabPanel>
+          <CustomTabPanel value={value} index={3}>
+            <div className="grid grid-cols-1 gap-3  md:grid-cols-2 lg:grid-cols-3">
+              {jobs
+                .filter((job) => job.category === "Hybrid")
+                .map((job) => (
+                  <JobCard key={job._id} job={job} />
+                ))}
+            </div>
+          </CustomTabPanel>
+          {/* <CustomTabPanel value={value} index={4}>
+        All Jobs
+      </CustomTabPanel> */}
+        </Box>
+      </div>
     </div>
-   
   );
 }

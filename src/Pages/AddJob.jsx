@@ -5,11 +5,12 @@ import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import axios from 'axios'
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const AddJob = () => {
     const {user} = useAuth()
     const [startDate, setStartDate] = useState(new Date())
-  
+  const navigate = useNavigate()
     
     
 
@@ -26,6 +27,7 @@ const AddJob = () => {
         const max_salary = parseFloat(form.max_salary.value);
         const description = form.description.value;
         const postingDate = new Date()
+       
 
         const jobData = {
             jobTitle, pictureURL, email,  userName, category, deadline, min_salary, max_salary, description, postingDate, applicants: 0, jobOwner: {
@@ -43,6 +45,16 @@ const AddJob = () => {
                 title: "Congratulations!",
                 text: "Job Added Successfully",
                 icon: "success"
+              });
+              form.reset()
+              navigate("/my-jobs")
+        })
+        .catch((error)=>{
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: `${error.message}`,
+                footer: '<a href="#">Why do I have this issue?</a>'
               });
         })
 
@@ -77,7 +89,7 @@ const AddJob = () => {
                 id='category'
                 className='block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring'
               >
-                <option value='On Time'>On Time</option>
+                <option value='On Site'>On Site</option>
                 <option value='Remote'>Remote</option>
                 <option value='Part Time'>Part Time</option>
                 <option value='Hybrid'>Hybrid</option>

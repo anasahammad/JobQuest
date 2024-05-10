@@ -8,6 +8,7 @@ import Login from "../Pages/Login";
 import Register from "../Pages/Register";
 import PrivateRoutes from "./PrivateRoutes";
 import ErrorPage from "../Pages/ErrorPage";
+import Blogs from "../Pages/Blogs";
 
 const router = createBrowserRouter([ 
     { 
@@ -32,6 +33,11 @@ const router = createBrowserRouter([
         {
             path: "/my-jobs",
             element: <PrivateRoutes><MyJobs/></PrivateRoutes>
+        }
+        ,
+        {
+            path: "/blogs",
+            element: <Blogs/>
         }
         ,
         {
