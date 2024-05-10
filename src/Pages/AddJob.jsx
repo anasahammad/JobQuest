@@ -3,12 +3,17 @@ import useAuth from "../hooks/useAuth";
 import { useState } from "react";
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
+import axios from 'axios'
+import Swal from "sweetalert2";
+
 const AddJob = () => {
     const {user} = useAuth()
     const [startDate, setStartDate] = useState(new Date())
-    const [applicants, setApplicants] = useState(0)
+  
+    
+    
 
-    const handleFormSubmit = event=>{
+    const handleFormSubmit = (event)=>{
         event.preventDefault()
         const form = event.target;
         const jobTitle = form.title.value;
@@ -29,7 +34,17 @@ const AddJob = () => {
                 photo: user?.photoURL
             }
         }
-        console.log(jobData);
+        
+      
+        axios.post('http://localhost:5000/job', jobData )
+        .then(res=>{
+            console.log(res.data);
+            Swal.fire({
+                title: "Congratulations!",
+                text: "Job Added Successfully",
+                icon: "success"
+              });
+        })
 
     }
     return (
