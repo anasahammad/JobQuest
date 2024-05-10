@@ -4,7 +4,7 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import { useTheme } from "@emotion/react";
+
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -41,20 +41,29 @@ function a11yProps(index) {
 
 export default function TabCategories() {
   const [value, setValue] = React.useState(0);
-  const theme = useTheme()
+ 
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
   return (
-    <Box sx={{ width: "100%" }}>
+    <div className=" container px-4 mx-auto ">
+
+        <div className="text-center">
+            <h1 className="text-3xl font-bold">Browse Jobs By Categories</h1>
+            <p className="my-4">Explore jobs by the categories of On site, Remote, Hybrid and Part time job.</p>
+        </div>
+        <div className="flex justify-center items-center">
+        <Box sx={{ width: "100%", margin: "0 auto" }}>
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-        <Tabs
+        <Tabs className="overflow-x-auto"
           centered
           value={value}
           onChange={handleChange}
           aria-label="basic tabs example"
+          variant={window.innerWidth <= 328 ? "scrollable" : "standard"}
+         scrollButtons="auto"
         >
           <Tab label="On-Site Job" {...a11yProps(0)} />
           <Tab
@@ -87,5 +96,9 @@ export default function TabCategories() {
         Item Four
       </CustomTabPanel>
     </Box>
+        </div>
+ 
+    </div>
+   
   );
 }
