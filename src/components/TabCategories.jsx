@@ -7,6 +7,7 @@ import Box from "@mui/material/Box";
 import JobCard from "./JobCard";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { HashLoader } from "react-spinners";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -56,7 +57,7 @@ export default function TabCategories() {
       return res.data;
     },
   });
-  if (isPending) return <p>The job is pending</p>;
+  if (isPending) return <div className="flex justify-center items-center min-h-screen"><HashLoader color="#6A38C2" /></div>;
 
   return (
     <div className="  px-4 mx-auto ">
@@ -138,9 +139,14 @@ export default function TabCategories() {
                 ))}
             </div>
           </CustomTabPanel>
-          {/* <CustomTabPanel value={value} index={4}>
-        All Jobs
-      </CustomTabPanel> */}
+          <CustomTabPanel value={value} index={4}>
+          <div className="grid grid-cols-1 gap-3  md:grid-cols-2 lg:grid-cols-3">
+              {jobs
+                .map((job) => (
+                  <JobCard key={job._id} job={job} />
+                ))}
+            </div>
+      </CustomTabPanel>
         </Box>
       </div>
     </div>

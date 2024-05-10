@@ -1,7 +1,8 @@
+import { Link } from "react-router-dom";
 
 
 const JobCard = ({job}) => {
-    const { jobTitle,postingDate, deadline, min_salary, max_salary,applicants, description, category, jobOwner } = job;
+    const { jobTitle,postingDate, deadline, min_salary, max_salary,applicants, description, category, jobOwner, _id } = job;
     return (
         <div   className=" max-w-lg px-3 lg:px-8 py-4  rounded-lg shadow-md dark:bg-gray-800">
     <div   className="flex items-center  justify-between">
@@ -26,7 +27,7 @@ const JobCard = ({job}) => {
 
         </div>
     <div   className="flex flex-col-reverse lg:flex-row lg:items-center justify-between mt-4">
-        <a href="#"   className="text-blue-600 dark:text-blue-400 hover:underline" tabIndex="0" role="link">View Details</a>
+        <Link to={`/details/${_id}`}   className="text-blue-600 dark:text-blue-400 hover:underline" tabIndex="0" role="link">View Details</Link>
 
         <div   className="flex items-center">
             

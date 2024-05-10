@@ -9,6 +9,7 @@ import Register from "../Pages/Register";
 import PrivateRoutes from "./PrivateRoutes";
 import ErrorPage from "../Pages/ErrorPage";
 import Blogs from "../Pages/Blogs";
+import JobDetails from "../components/JobDetails";
 
 const router = createBrowserRouter([ 
     { 
@@ -38,6 +39,12 @@ const router = createBrowserRouter([
         {
             path: "/blogs",
             element: <Blogs/>
+        }
+        ,
+        {
+            path: "/details/:id",
+            element: <PrivateRoutes><JobDetails/></PrivateRoutes>,
+            loader: ({params})=>fetch(`http://localhost:5000/jobs/${params.id}`)
         }
         ,
         {

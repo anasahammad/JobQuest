@@ -40,7 +40,7 @@ const Navbar = () => {
       }, [theme]);
     return (
         <nav  className="relative  shadow">
-    <div className="container px-6 py-4 mx-auto md:flex md:justify-between md:items-center">
+    <div className="container px-6 py-4 mx-auto lg:flex lg:justify-between lg:items-center">
         <div className="flex items-center justify-between">
             <Link to="/" className="flex gap-3">
                 <img className="w-auto h-6 sm:h-7" src={logo} alt=""/>
@@ -48,11 +48,11 @@ const Navbar = () => {
             </Link>
 
             {/* <!-- Mobile menu button --> */}
-            <div className="flex md:hidden lg:hidden">
+            <div className="flex  lg:hidden">
 
             {
-                user && <div data-tip={user?.displayName} className="mr-2 md:hidden tooltip tooltip-bottom">
-                <img alt="" className="w-12 h-12 border rounded-full dark:bg-gray-500 dark:border-gray-300" src={user?.photoURL} />
+                user && <div data-tip={user?.displayName} className="mr-2 lg:hidden tooltip tooltip-bottom">
+                <img alt="" className="w-11 h-11 border rounded-full dark:bg-gray-500 dark:border-gray-300" src={user?.photoURL} />
                 </div>
             }
             <label className="swap swap-rotate mr-3">
@@ -87,9 +87,9 @@ const Navbar = () => {
         </div>
 
         {/* <!-- Mobile Menu open: "block", Menu closed: "hidden" --> */}
-        <div  className={`absolute inset-x-0 z-20 w-full px-6 py-4 transition-all duration-300 ease-in-out bg-base-200 dark:bg-blue-500 md:mt-0 md:p-0 md:top-0 md:relative md:bg-transparent md:w-auto md:opacity-100 md:translate-x-0 md:flex md:items-center ${isOpen ? 'block' : 'hidden'}`}>
+        <div  className={`absolute inset-x-0 z-20 w-full px-6 py-4 transition-all duration-300 ease-in-out bg-base-100 dark:bg-blue-500  lg:top-0 lg:relative lg:bg-transparent lg:w-auto lg:opacity-100 lg:translate-x-0 lg:flex lg:items-center ${isOpen ? 'block' : 'hidden'}`}>
           
-            <div className="flex flex-col md:items-center md:flex-row md:mx-6">
+            <div className="flex flex-col lg:items-center lg:flex-row lg:mx-6">
                 <Link to="/" className="my-2   transition-colors duration-300 transform hover:text-[#6A38C2]  md:mx-4 md:my-0">Home</Link>
                 <Link to="/all-jobs" className="my-2  transition-colors duration-300 transform dark:text-gray-200 hover:text-[#6A38C2]  md:mx-4 md:my-0">All Jobs</Link>
                 <Link to="/add-job" className="my-2  transition-colors duration-300 transform dark:text-gray-200 hover:text-[#6A38C2]  md:mx-4 md:my-0">Add A Job</Link>
@@ -119,13 +119,13 @@ const Navbar = () => {
                     
             </div>
             {
-                user && <div data-tip={user?.displayName}  className="mr-2 hidden md:block tooltip tooltip-bottom">
-                <img alt="" className="w-12 h-12 border rounded-full dark:bg-gray-500 dark:border-gray-300" src={user?.photoURL} />
+                user && <div data-tip={user?.displayName}  className="mr-2 hidden lg:block tooltip tooltip-bottom">
+                <img alt="" className="w-11 h-11 border rounded-full dark:bg-gray-500 dark:border-gray-300" src={user?.photoURL} />
                 </div>
             }
             
 
-            <div className=" hidden md:block">
+            <div className=" hidden lg:block">
                 
             <label className="swap swap-rotate ">
   
