@@ -124,7 +124,7 @@ export default function TabCategories() {
           <CustomTabPanel value={value} index={2}>
             <div className="grid grid-cols-1 gap-3  md:grid-cols-2 lg:grid-cols-3">
               {jobs
-                .filter((job) => job.category === "Part Time")
+                .filter((job) => job.category === "Hybrid")
                 .map((job) => (
                   <JobCard key={job._id} job={job} />
                 ))}
@@ -133,7 +133,7 @@ export default function TabCategories() {
           <CustomTabPanel value={value} index={3}>
             <div className="grid grid-cols-1 gap-3  md:grid-cols-2 lg:grid-cols-3">
               {jobs
-                .filter((job) => job.category === "Hybrid")
+                .filter((job) => job.category === "Part Time")
                 .map((job) => (
                   <JobCard key={job._id} job={job} />
                 ))}
