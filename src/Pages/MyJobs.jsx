@@ -3,6 +3,7 @@ import axios from 'axios'
 import useAuth from "../hooks/useAuth";
 import { HashLoader } from "react-spinners";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 const MyJobs = () => {
     const {user} = useAuth()
     const {isPending,data: jobs, refetch} = useQuery({
@@ -183,8 +184,8 @@ const MyJobs = () => {
                           </div>
                         </td>
                         <td className="px-4 py-4 text-sm whitespace-nowrap">
-                          <div onClick={()=>handleDelete(job._id)} className="flex items-center gap-x-6">
-                            <button className=" transition-colors duration-200 dark:hover:text-red-500 dark:text-gray-300 text-red-600 focus:outline-none">
+                          <div  className="flex items-center gap-x-6">
+                            <button onClick={()=>handleDelete(job._id)} className=" transition-colors duration-200 dark:hover:text-red-500 dark:text-gray-300 text-red-600 focus:outline-none">
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
@@ -201,7 +202,7 @@ const MyJobs = () => {
                               </svg>
                             </button>
     
-                            <button className=" transition-colors duration-200 dark:hover:text-yellow-500 dark:text-gray-300 hover:text-yellow-500 focus:outline-none">
+                            <Link to={`/update/${job._id}`} className=" transition-colors duration-200 dark:hover:text-yellow-500 dark:text-gray-300 hover:text-yellow-500 focus:outline-none">
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
@@ -216,7 +217,7 @@ const MyJobs = () => {
                                   d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
                                 />
                               </svg>
-                            </button>
+                            </Link>
                           </div>
                         </td>
                       </tr>)

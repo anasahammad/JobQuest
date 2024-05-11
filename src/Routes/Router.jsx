@@ -11,6 +11,7 @@ import ErrorPage from "../Pages/ErrorPage";
 import Blogs from "../Pages/Blogs";
 import JobDetails from "../components/JobDetails";
 import AppliedJob from "../Pages/AppliedJob";
+import UpdateJob from "../Pages/UpdateJob";
 
 const router = createBrowserRouter([ 
     { 
@@ -51,6 +52,12 @@ const router = createBrowserRouter([
             path: "/details/:id",
             element: <PrivateRoutes><JobDetails/></PrivateRoutes>,
             loader: ({params})=>fetch(`http://localhost:5000/jobs/${params.id}`)
+        }
+        ,
+        {
+            path: "/update/:id",
+            element: <PrivateRoutes><UpdateJob/></PrivateRoutes>,
+            loader: ({params})=>fetch(`http://localhost:5000/job/${params.id}`)
         }
         ,
         {
