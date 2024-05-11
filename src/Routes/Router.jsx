@@ -9,9 +9,11 @@ import Register from "../Pages/Register";
 import PrivateRoutes from "./PrivateRoutes";
 import ErrorPage from "../Pages/ErrorPage";
 import Blogs from "../Pages/Blogs";
-import JobDetails from "../components/JobDetails";
+
 import AppliedJob from "../Pages/AppliedJob";
 import UpdateJob from "../Pages/UpdateJob";
+import JobDetails from "../components/JobDetails";
+
 
 const router = createBrowserRouter([ 
     { 
@@ -69,6 +71,8 @@ const router = createBrowserRouter([
             path: "/register",
             element: <Register/>
         }
+        ,
+        
     ] 
     }, 
    ]); 

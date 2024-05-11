@@ -1,10 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import {  useParams } from "react-router-dom";
+import { useState } from "react";
+import { useParams } from "react-router-dom";
 import axios from 'axios'
 import { HashLoader } from "react-spinners";
-import { useState } from "react";
 import ModalPopup from "./ModalPopup";
-
 
 const JobDetails = () => {
     const {id} = useParams()
@@ -23,7 +22,6 @@ const JobDetails = () => {
       const { jobTitle,postingDate, deadline, min_salary, max_salary,applicants, description, category, jobOwner, _id, pictureURL } = singleJob || {}
 
 
-      //for apply modal
       const openModal = () => {
         setIsOpen(true);
       };
@@ -32,22 +30,25 @@ const JobDetails = () => {
         setIsOpen(false);
       };
     return (
-        <section className="p-6 ">
-        <div className="container grid gap-6 mx-auto  lg:grid-cols-2 xl:grid-cols-5">
-            <div className="w-full px-6 py-16 rounded-md sm:px-12 md:px-16 xl:col-span-2 dark:bg-gray-50">
-                <h1 className="text-5xl font-extrabold ">{jobTitle}</h1>
-                <p className="my-8">
-                    <span className="font-medium max-w-md text-2xl">Description: <br /> </span>{description}
+        <section className=" dark:bg-gray-900">
+    <div className="container px-6 py-10 mx-auto">
+        <h1 className="text-2xl font-semibold  capitalize lg:text-3xl dark:text-white">{jobTitle}</h1>
+
+        <div className="mt-8 lg:-mx-6 lg:flex lg:items-center lg:px-8">
+            <img className="object-cover w-full lg:mx-6 lg:w-1/2 rounded-xl h-72 lg:h-96" src={pictureURL} alt=""/>
+
+            <div className="mt-6 lg:w-1/2 lg:mt-0 lg:mx-6 space-y-4">
+                <h3 className="text-2xl font-bold">Description: </h3>
+            <p className="mt-3 text-sm  dark:text-gray-300 md:text-sm">
+                    {description}
                 </p>
-                
-                <div className="space-y-4">
                     <h3 className="font-medium text-2xl">About This Role</h3>
                     <div className="flex  justify-between items-center">
                         <p className="">
                             Apply Before 
                         </p>
 
-                        <p className="font-bold">
+                        <p className="font-bold text-xs lg:text-base text-right">
                           {new Date(deadline).toDateString()}  
                         </p>
                     </div>
@@ -56,7 +57,7 @@ const JobDetails = () => {
                             Job Posted On 
                         </p>
 
-                        <p className="font-bold text-right">
+                        <p className="font-bold text-xs lg:text-base">
                           {new Date(postingDate).toDateString()}  
                         </p>
                     </div>
@@ -65,7 +66,7 @@ const JobDetails = () => {
                             Job Type
                         </p>
 
-                        <p className="font-bold">
+                        <p className="font-bold text-xs lg:text-base">
                          {category} 
                         </p>
                     </div>
@@ -74,7 +75,7 @@ const JobDetails = () => {
                             Already Applied
                         </p>
 
-                        <p className="font-bold">
+                        <p className="font-bold text-xs lg:text-base">
                          {applicants} 
                         </p>
                     </div>
@@ -83,7 +84,7 @@ const JobDetails = () => {
                             Salary 
                         </p>
 
-                        <p className=' font-bold  '>
+                        <p className=' font-bold  text-xs lg:text-base'>
            ${min_salary} - ${max_salary}
 
         </p>
@@ -94,10 +95,9 @@ const JobDetails = () => {
                     </div>
                     <ModalPopup singleJob={singleJob}  openModal={openModal} isOpen={isOpen} closeModal={closeModal}> </ModalPopup>
                 </div>
-            </div>
-            <img src={pictureURL} />
         </div>
-    </section>
+    </div>
+</section>
     );
 };
 
