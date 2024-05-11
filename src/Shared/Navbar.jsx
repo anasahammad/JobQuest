@@ -91,9 +91,10 @@ const Navbar = () => {
           
             <div className="flex flex-col lg:items-center lg:flex-row lg:mx-6">
                 <Link to="/" className="my-2   transition-colors duration-300 transform hover:text-[#6A38C2]  md:mx-4 md:my-0">Home</Link>
+                <Link to="/blogs" className="my-2  transition-colors duration-300 transform dark:text-gray-200 hover:text-[#6A38C2]  md:mx-4 md:my-0">Blogs</Link>
                 <Link to="/all-jobs" className="my-2  transition-colors duration-300 transform dark:text-gray-200 hover:text-[#6A38C2]  md:mx-4 md:my-0">All Jobs</Link>
                 <Link to="/add-job" className="my-2  transition-colors duration-300 transform dark:text-gray-200 hover:text-[#6A38C2]  md:mx-4 md:my-0">Add A Job</Link>
-                <Link to="/blogs" className="my-2  transition-colors duration-300 transform dark:text-gray-200 hover:text-[#6A38C2]  md:mx-4 md:my-0">Blogs</Link>
+               
                
                
                 
@@ -105,6 +106,7 @@ const Navbar = () => {
                     <>
                     
                     <Link to="/my-jobs" className="my-2  transition-colors duration-300 transform dark:text-gray-200 hover:text-[#6A38C2]  md:mx-4 md:my-0">My Jobs</Link>
+                    <Link to="/applied-jobs" className="my-2  transition-colors duration-300 transform dark:text-gray-200 hover:text-[#6A38C2]  md:mx-4 md:my-0">Applied Jobs</Link>
                     <button onClick={handleSignOut} type="button" className="px-4 py-2 font-semibold border bg-primary text-white rounded  ">Sign Out</button>
                     </>
                     
