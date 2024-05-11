@@ -1,11 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
-import { useLoaderData, useParams } from "react-router-dom";
+import {  useParams } from "react-router-dom";
 import axios from 'axios'
 import { HashLoader } from "react-spinners";
+import { useState } from "react";
+import ModalPopup from "./ModalPopup";
 
 
 const JobDetails = () => {
     const {id} = useParams()
+    const [isOpen, setIsOpen] = useState(false);
     const { isPending ,data: jobs = [] } = useQuery({
         queryKey: ["jobs"],
         queryFn: async () => {
@@ -18,6 +21,16 @@ const JobDetails = () => {
      
       //destructer the singleJob
       const { jobTitle,postingDate, deadline, min_salary, max_salary,applicants, description, category, jobOwner, _id, pictureURL } = singleJob || {}
+
+
+      //for apply modal
+      const openModal = () => {
+        setIsOpen(true);
+      };
+    
+      const closeModal = () => {
+        setIsOpen(false);
+      };
     return (
         <section className="p-6 ">
         <div className="container grid gap-6 mx-auto  lg:grid-cols-2 xl:grid-cols-5">
@@ -77,8 +90,9 @@ const JobDetails = () => {
                     </div>
 
                     <div>
-                    <button type="button" className="px-8 py-3 font-semibold border rounded bg-[#6A38C2] text-white w-full">Apply Now</button>
+                    <button onClick={openModal} type="button" className="px-8 py-3 font-semibold border rounded bg-[#6A38C2] text-white w-full">Apply Now</button>
                     </div>
+                    <ModalPopup singleJob={singleJob}  openModal={openModal} isOpen={isOpen} closeModal={closeModal}> </ModalPopup>
                 </div>
             </div>
             <img src={pictureURL} />
