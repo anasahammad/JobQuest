@@ -2,9 +2,10 @@ import { useQuery } from "@tanstack/react-query";
 import axios from 'axios'
 import useAuth from "../hooks/useAuth";
 import { HashLoader } from "react-spinners";
+import Swal from "sweetalert2";
 const MyJobs = () => {
     const {user} = useAuth()
-    const {isPending,data: jobs} = useQuery({
+    const {isPending,data: jobs, refetch} = useQuery({
         queryKey: ['jobs'],
         queryFn: async ()=>{
             const res = await axios(`http://localhost:5000/jobs/${user?.email}`)
@@ -12,6 +13,51 @@ const MyJobs = () => {
         }
     })
     if (isPending) return <div className="flex justify-center items-center min-h-screen"><HashLoader color="#6A38C2" /></div>;
+
+    const handleDelete = (id)=>{
+        // axios.delete(`http://localhost:5000/jobs/${id}`)
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+              confirmButton: "btn btn-success",
+              cancelButton: "btn btn-danger"
+            },
+            buttonsStyling: false
+          });
+          swalWithBootstrapButtons.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Yes, delete it!",
+            cancelButtonText: "No, cancel!",
+            reverseButtons: true
+          }).then((result) => {
+            if (result.isConfirmed) {
+              axios.delete(`http://localhost:5000/jobs/${id}`)
+              .then(res=>{
+                if(res.data.deletedCount > 0){
+                    refetch()
+                    swalWithBootstrapButtons.fire({
+                        title: "Deleted!",
+                        text: "Your file has been deleted.",
+                        icon: "success"
+                      });
+                }
+              })
+             
+             
+            } else if (
+              /* Read more about handling dismissals below */
+              result.dismiss === Swal.DismissReason.cancel
+            ) {
+              swalWithBootstrapButtons.fire({
+                title: "Cancelled",
+                text: "Your imaginary file is safe :)",
+                icon: "error"
+              });
+            }
+          });
+    }
 
   return (
     <section className="container px-4 mx-auto">
@@ -37,7 +83,7 @@ const MyJobs = () => {
                       className="py-3.5 px-4 text-sm font-normal text-left rtl:text-right 
                       "
                     >
-                      <div className="flex items-center gap-x-3">
+                      <div className="flex font-bold items-center gap-x-3">
                         <span>Job Title</span>
                       </div>
                     </th>
@@ -47,7 +93,7 @@ const MyJobs = () => {
                       className="px-12 py-3.5 text-sm font-normal text-left rtl:text-right 
                       "
                     >
-                      <button className="flex items-center gap-x-2">
+                      <button className="flex font-bold items-center gap-x-2">
                         <span>Category</span>
                       </button>
                     </th>
@@ -57,7 +103,7 @@ const MyJobs = () => {
                       className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right 
                       "
                     >
-                      <button className="flex items-center gap-x-2">
+                      <button className="flex items-center font-bold gap-x-2">
                         <span>Salary Range</span>
 
                         <svg
@@ -79,7 +125,7 @@ const MyJobs = () => {
 
                     <th
                       scope="col"
-                      className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right 
+                      className="px-4 py-3.5 text-sm font-bold text-left rtl:text-right 
                       "
                     >
                       Deadline
@@ -87,7 +133,7 @@ const MyJobs = () => {
 
                     <th
                       scope="col"
-                      className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right  
+                      className="px-4 py-3.5 text-sm font-bold text-left rtl:text-right  
                       "
                     >
                       Total Applied
@@ -137,7 +183,7 @@ const MyJobs = () => {
                           </div>
                         </td>
                         <td className="px-4 py-4 text-sm whitespace-nowrap">
-                          <div className="flex items-center gap-x-6">
+                          <div onClick={()=>handleDelete(job._id)} className="flex items-center gap-x-6">
                             <button className=" transition-colors duration-200 dark:hover:text-red-500 dark:text-gray-300 text-red-600 focus:outline-none">
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -183,96 +229,7 @@ const MyJobs = () => {
         </div>
       </div>
 
-      <div className="flex items-center justify-between mt-6">
-        <a
-          href="#"
-          className="flex items-center px-5 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 bg-white border rounded-md gap-x-2 hover:bg-gray-100 dark:bg-gray-900 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="1.5"
-            stroke="currentColor"
-            className="w-5 h-5 rtl:-scale-x-100"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18"
-            />
-          </svg>
-
-          <span>previous</span>
-        </a>
-
-        <div className="items-center hidden lg:flex gap-x-3">
-          <a
-            href="#"
-            className="px-2 py-1 text-sm text-blue-500 rounded-md dark:bg-gray-800 bg-blue-100/60"
-          >
-            1
-          </a>
-          <a
-            href="#"
-            className="px-2 py-1 text-sm  rounded-md dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100"
-          >
-            2
-          </a>
-          <a
-            href="#"
-            className="px-2 py-1 text-sm  rounded-md dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100"
-          >
-            3
-          </a>
-          <a
-            href="#"
-            className="px-2 py-1 text-sm  rounded-md dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100"
-          >
-            ...
-          </a>
-          <a
-            href="#"
-            className="px-2 py-1 text-sm  rounded-md dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100"
-          >
-            12
-          </a>
-          <a
-            href="#"
-            className="px-2 py-1 text-sm  rounded-md dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100"
-          >
-            13
-          </a>
-          <a
-            href="#"
-            className="px-2 py-1 text-sm  rounded-md dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100"
-          >
-            14
-          </a>
-        </div>
-
-        <a
-          href="#"
-          className="flex items-center px-5 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 bg-white border rounded-md gap-x-2 hover:bg-gray-100 dark:bg-gray-900 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800"
-        >
-          <span>Next</span>
-
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="1.5"
-            stroke="currentColor"
-            className="w-5 h-5 rtl:-scale-x-100"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
-            />
-          </svg>
-        </a>
-      </div>
+      
     </section>
   );
 };
