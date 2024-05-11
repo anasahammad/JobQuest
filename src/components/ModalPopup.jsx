@@ -1,9 +1,64 @@
 import { useState } from "react";
 import useAuth from "../hooks/useAuth";
-
+import Swal from "sweetalert2";
+import axios from 'axios'
 const ModalPopup = ({closeModal, isOpen, openModal, singleJob}) => {
   const {user} = useAuth()
 
+  const { jobTitle,postingDate, deadline, min_salary, max_salary,applicants, description, category, jobOwner, _id, pictureURL } = singleJob || {}
+  console.log(deadline);
+  const handleFormSubmit = event =>{
+    event.preventDefault()
+    const form = event.target;
+    const jobId = _id 
+    const email = form.email.value
+    const name = form.name.value
+    const resume = form.resume.value;
+    const currentDate = Date.now()
+    if(currentDate > new Date(deadline).getTime()) {
+        return Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: `The Application Deadline is Over! 😞;`,
+            footer: '<a href="#">Why do I have this issue?</a>'
+          });
+    }
+  
+    
+    const employeData = {
+        jobId,
+        email,
+        name,
+        resume,
+        currentDate,
+        jobOwner,
+        category,
+        applicants,
+        jobOwner_email : jobOwner?.email
+
+    }
+    console.log(employeData)
+
+    axios.post('http://localhost:5000/applied', employeData )
+    .then(res=>{
+        console.log(res.data);
+        Swal.fire({
+            title: "Congratulations!",
+            text: "Successfully Applied the job",
+            icon: "success"
+          });
+          form.reset()
+        //   navigate("/my-jobs")
+    })
+    .catch((error)=>{
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: `${error.message}`,
+            footer: '<a href="#">Why do I have this issue?</a>'
+          });
+    })
+  }
 
 
   return (
@@ -30,14 +85,14 @@ const ModalPopup = ({closeModal, isOpen, openModal, singleJob}) => {
                 <h3
                   className="text-lg font-medium leading-6 text-gray-800 capitalize dark:text-white"
                   id="modal-title"
-                > Apply for the post of <span>{singleJob.jobTitle}</span>
+                > Apply for the post of <span>{jobTitle}</span>
                   
                 </h3>
                 <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
                  Here fill up the form carefully and submit your application for this post.
                 </p>
 
-                <form className="mt-4" action="#">
+                <form onSubmit={handleFormSubmit} className="mt-4" action="#">
                   <label
                     htmlFor="emails-list"
                     className="text-sm text-gray-700 dark:text-gray-200"
@@ -105,7 +160,8 @@ const ModalPopup = ({closeModal, isOpen, openModal, singleJob}) => {
                     </button>
 
                     <button
-                      type="button"
+                      type="submit"
+                      
                       className="w-full px-4 py-2 mt-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-md sm:mt-0 sm:w-1/2 sm:mx-2 hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40"
                     >
                      Submit
