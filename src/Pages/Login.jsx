@@ -16,6 +16,7 @@ const Login = () => {
       const navigate = useNavigate()
       const location = useLocation()
       const from = location?.state || "/";
+      console.log(location);
 
       const handleSignIn = data => {
         const {email, password} = data;

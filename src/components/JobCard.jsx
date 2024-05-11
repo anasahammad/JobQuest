@@ -1,8 +1,27 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
+import Swal from "sweetalert2";
 
 
 const JobCard = ({job}) => {
     const { jobTitle,postingDate, deadline, min_salary, max_salary,applicants, description, category, jobOwner, _id } = job;
+    const {user} = useAuth()
+    const navigate = useNavigate()
+    // const from = ;
+    const handleViewDetails = ()=>{
+        if(user){
+            navigate(location.state)
+        }
+        else{
+            Swal.fire({
+                icon: "error",
+                title: "Sorry...",
+                text: `You have to login first to view details`,
+                footer: '<a href="#">Why do I have this issue?</a>'
+              });
+              
+        }
+    }
     return (
         <div   className=" max-w-lg px-3 lg:px-8 py-4  rounded-lg shadow-md dark:bg-gray-800">
     <div   className="flex items-center  justify-between">
@@ -27,7 +46,7 @@ const JobCard = ({job}) => {
 
         </div>
     <div   className="flex flex-col-reverse lg:flex-row lg:items-center justify-between mt-4">
-        <Link to={`/details/${_id}`}   className="text-blue-600 dark:text-blue-400 hover:underline" tabIndex="0" role="link">View Details</Link>
+        <Link to={ `/details/${_id}`}   onClick={handleViewDetails}  className="text-blue-600 dark:text-blue-400 hover:underline" tabIndex="0" role="link">View Details</Link>
 
         <div   className="flex items-center">
             
