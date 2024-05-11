@@ -10,8 +10,17 @@ const ModalPopup = ({closeModal, isOpen, openModal, singleJob}) => {
   const handleFormSubmit = event =>{
     event.preventDefault()
     const form = event.target;
+   
     const jobId = _id 
     const email = form.email.value
+    if(email === jobOwner.email){
+        return Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: `You cannot applied your own job!😉;`,
+            footer: '<a href="#">Why do I have this issue?</a>'
+          });
+    }
     const name = form.name.value
     const resume = form.resume.value;
     const currentDate = Date.now()
