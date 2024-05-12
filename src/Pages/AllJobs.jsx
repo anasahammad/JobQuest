@@ -27,6 +27,8 @@ const AllJobs = () => {
     refetch()
   }, [currentPage, itemsPerPage, refetch, filter, search])
 
+  
+
   const handlePrev = ()=>{
     if(currentPage > 0){
         setCurrentPage(currentPage - 1)
@@ -180,6 +182,7 @@ const AllJobs = () => {
             </div>
           </div>
 
+           
           <div className="md:w-3/4 space-y-4">
             {jobs?.map((job) => (
               <div key={job._id} className="border">
