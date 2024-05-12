@@ -9,6 +9,8 @@ const AllJobs = () => {
     const [itemsPerPage, setItemsPerPage] = useState(5)
     const [currentPage, setCurrentPage] = useState(1)
     const [filter, setFilter] = useState('')
+    const [search, setSearch] = useState('')
+    const [searchText, setSearchText] = useState('')
     const numberOfPage = Math.ceil(count / itemsPerPage)
     const pages = [...Array(numberOfPage).keys().map(page=> page + 1 )]
    
@@ -16,14 +18,14 @@ const AllJobs = () => {
   const { isPending, data: jobs, refetch } = useQuery({
     queryKey: ["jobs"],
     queryFn: async () => {
-      const res = await axios(`http://localhost:5000/jobs?page=${currentPage}&size=${itemsPerPage}&filter=${filter}`);
+      const res = await axios(`http://localhost:5000/jobs?page=${currentPage}&size=${itemsPerPage}&filter=${filter}&search=${search}`);
       return res.data;
     },
   });
   
   useEffect(()=>{
     refetch()
-  }, [currentPage, itemsPerPage, refetch, filter])
+  }, [currentPage, itemsPerPage, refetch, filter, search])
 
   const handlePrev = ()=>{
     if(currentPage > 0){
@@ -35,6 +37,10 @@ const AllJobs = () => {
     if(currentPage < pages.length){
         setCurrentPage( currentPage + 1)
     }
+  }
+  const handleSearch = e =>{
+    e.preventDefault()
+    setSearch(searchText)
   }
 
   if (isPending) return (
@@ -72,8 +78,12 @@ const AllJobs = () => {
               
             </select>
           </div>
-          <div className="flex md:w-2/4 flex-col mt-8 space-y-3 sm:space-y-0 sm:flex-row sm:justify-center sm:-mx-2">
+         
+          <form onSubmit={handleSearch} className="flex md:w-2/4 flex-col mt-8 space-y-3 sm:space-y-0 sm:flex-row sm:justify-center sm:-mx-2">
+             
             <input
+            onChange={(e)=> setSearchText(e.target.value)}
+            value={searchText}
               id="text"
               type="text"
               className="px-4 md:w-full  py-2 text-gray-700 bg-white border rounded-md sm:mx-2 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40"
@@ -83,7 +93,7 @@ const AllJobs = () => {
             <button className="px-4 py-2 md:w-1/4  text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-700 rounded-md sm:mx-2 hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
               Search
             </button>
-          </div>
+          </form>
         </div>
       </div>
 
