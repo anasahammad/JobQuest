@@ -8,21 +8,22 @@ const AllJobs = () => {
     const {count} = useLoaderData()
     const [itemsPerPage, setItemsPerPage] = useState(5)
     const [currentPage, setCurrentPage] = useState(1)
+    const [filter, setFilter] = useState('')
     const numberOfPage = Math.ceil(count / itemsPerPage)
     const pages = [...Array(numberOfPage).keys().map(page=> page + 1 )]
-    console.log(pages);
+   
    
   const { isPending, data: jobs, refetch } = useQuery({
     queryKey: ["jobs"],
     queryFn: async () => {
-      const res = await axios(`http://localhost:5000/jobs?page=${currentPage}&size=${itemsPerPage}`);
+      const res = await axios(`http://localhost:5000/jobs?page=${currentPage}&size=${itemsPerPage}&filter=${filter}`);
       return res.data;
     },
   });
   
   useEffect(()=>{
     refetch()
-  }, [currentPage, itemsPerPage, refetch])
+  }, [currentPage, itemsPerPage, refetch, filter])
 
   const handlePrev = ()=>{
     if(currentPage > 0){
@@ -56,17 +57,19 @@ const AllJobs = () => {
         <div className="flex flex-col md:flex-row items-center justify-center md:gap-10 px-4">
           <div className=" md:pt-8 md:w-2/4">
             <select
-              name="category"
-              id="category"
+           onChange={e =>setFilter(e.target.value)}
+           value={filter}
+             
+              name="sort"
+              id="sort"
               className="border p-2 text-gray-700 bg-white   sm:mx-2 dark:bg-gray-900 dark:text-black dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 rounded-md md:w-full"
             >
-              <option selected disabled value="">
-                Sort By Deadline
-              </option>
-              <option value="On Site">On Site Job</option>
-              <option value="Remote">Remote Job</option>
-              <option value="Hybrid">Hybrid Job</option>
-              <option value="Part Time">Part Time Job</option>
+               <option selected disabled value=''>Filter By Category</option>
+              <option value='On Site'>On Site Job</option>
+              <option value='Remote'>Remote Job</option>
+              <option value='Hybrid'>Hybrid Job</option>
+              <option value='Part Time'>Part Time Job</option>
+              
             </select>
           </div>
           <div className="flex md:w-2/4 flex-col mt-8 space-y-3 sm:space-y-0 sm:flex-row sm:justify-center sm:-mx-2">
@@ -190,7 +193,7 @@ const AllJobs = () => {
                       </span>
 
                       <div className="grid grid-cols-1 md:grid-cols-3 md:gap-8">
-                        <p className="text-sm bg-[#56cdad1a] text-[#56CDAD] text-center rounded-[80px]">Posted At: {new Date(job.postingDate).toLocaleDateString()} </p>
+                        <p className="text-sm bg-[#56cdad1a] text-[#56CDAD] text-center rounded-[80px]">{job.category}</p>
 
                         <p className="text-sm   rounded-[80px]  bg-[#FFB836] text-white text-center">Salary Range: ${job.min_salary} - ${job.max_salary}</p>
                         <p className="text-sm bg-[#4640DE] text-[white] text-center rounded-[80px]">Deadline: {new Date(job.deadline).toLocaleDateString()}</p>
@@ -222,7 +225,7 @@ const AllJobs = () => {
 {/* Pagination */}
 <div className="flex justify-center">
     
-    <button disabled={currentPage === 1} onClick={handlePrev} className="flex items-center justify-center px-4 py-2 mx-1 text-gray-500 capitalize bg-white rounded-md  rtl:-scale-x-100 dark:bg-gray-800 dark:text-gray-600">
+    <button disabled={currentPage === 1} onClick={handlePrev} className="flex items-center justify-center px-4 py-2 mx-1 text-gray-500 capitalize bg-white rounded-md  rtl:-scale-x-100 dark:bg-gray-800 hover:bg-blue-400 hover:text-white dark:text-gray-600">
         <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
             <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
         </svg>
