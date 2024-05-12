@@ -2,8 +2,10 @@ import { useQuery } from "@tanstack/react-query";
 import { FaChevronDown } from "react-icons/fa";
 import axios from "axios";
 import { HashLoader } from "react-spinners";
-import { Link, useLoaderData } from "react-router-dom";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import useAuth from "../hooks/useAuth";
+import Swal from "sweetalert2";
 const AllJobs = () => {
     const {count} = useLoaderData()
     const [itemsPerPage, setItemsPerPage] = useState(5)
@@ -13,6 +15,8 @@ const AllJobs = () => {
     const [searchText, setSearchText] = useState('')
     const numberOfPage = Math.ceil(count / itemsPerPage)
     const pages = [...Array(numberOfPage).keys().map(page=> page + 1 )]
+    const {user} = useAuth()
+    const navigate = useNavigate()
    
    
   const { isPending, data: jobs, refetch } = useQuery({
@@ -45,11 +49,27 @@ const AllJobs = () => {
     setSearch(searchText)
   }
 
+
   if (isPending) return (
       <div className="flex justify-center items-center min-h-screen">
         <HashLoader color="#6A38C2" />
       </div>
     );
+
+    const handleViewDetails = ()=>{
+        if(user){
+            navigate(location.state)
+        }
+        else{
+            Swal.fire({
+                icon: "error",
+                title: "Sorry...",
+                text: `You have to login first to view details`,
+                footer: '<a href="#">Why do I have this issue?</a>'
+              });
+              
+        }
+    }
   return (
     <div className="my-12 container mx-auto md:px-8">
       <div className="text-center  space-y-4">
@@ -99,7 +119,7 @@ const AllJobs = () => {
         </div>
       </div>
 
-      <div>
+      <div className="mt-10"> 
         <div className="flex px-4 md:items-start flex-col md:flex-row md:gap-16 ">
           <div className="grid grid-cols-1 md:gap-6">
             <div className="">
@@ -216,7 +236,7 @@ const AllJobs = () => {
 
                   <div className="flex items-center md:items-center mt-4 md:mt-0 flex-col gap-4">
                     <div>
-                      <Link to={`/details/${job._id}`} className="px-6 py-2    font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-700 rounded-md sm:mx-2 hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
+                      <Link to={`/details/${job._id}`} onClick={handleViewDetails}  className="px-6 py-2    font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-700 rounded-md sm:mx-2 hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
                         Details
                       </Link>
                     </div>
