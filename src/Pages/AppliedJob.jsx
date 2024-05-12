@@ -3,21 +3,26 @@ import useAuth from "../hooks/useAuth";
 import axios from 'axios'
 import { HashLoader } from "react-spinners";
 import { PDFDownloadLink, Document, Page, Text, View, StyleSheet } from '@react-pdf/renderer';
+import { useEffect, useState } from "react";
 
 
 
 const AppliedJob = () => {
     const {user} = useAuth()
+    const [filter, setFilter] = useState('')
     
-    const {isPending, data: jobs} = useQuery({
+    const {isPending, data: jobs, refetch} = useQuery({
         queryKey: ['jobs'],
         queryFn: async ()=>{
-            const res = await axios(`http://localhost:5000/applied-jobs/${user?.email}`)
-            return res.data
+            const res = await axios(`http://localhost:5000/applied-jobs/${user?.email}?filter=${filter}`)
+            return res.data;
+
         }
     })
 
-
+useEffect(()=>{
+    refetch()
+},[filter, refetch])
  
 
     const PDFDocument = () => (
@@ -117,6 +122,8 @@ const AppliedJob = () => {
         <div className="sm:flex sm:items-center sm:justify-between">
             <h2 className="text-lg font-medium  dark:text-white">All Applied Jobs</h2>
             <select
+            onChange={e =>setFilter(e.target.value)}
+            value={filter}
               name='category'
               id='category'
               className='border p-4 rounded-lg'
