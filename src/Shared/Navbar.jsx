@@ -52,7 +52,7 @@ const Navbar = () => {
 
             {
                 user && <div data-tip={user?.displayName} className="mr-2 lg:hidden tooltip tooltip-bottom">
-                <img alt="" className="w-11 h-11 border rounded-full dark:bg-gray-500 dark:border-gray-300" src={user?.photoURL} />
+                <img alt="" className="w-11 h-11 border cursor-pointer rounded-full dark:bg-gray-500 dark:border-gray-300" src={user?.photoURL} />
                 </div>
             }
             <label className="swap swap-rotate mr-3">
@@ -122,7 +122,7 @@ const Navbar = () => {
             </div>
             {
                 user && <div data-tip={user?.displayName}  className="mr-2 hidden lg:block tooltip tooltip-bottom">
-                <img alt="" className="w-11 h-11 border rounded-full dark:bg-gray-500 dark:border-gray-300" src={user?.photoURL} />
+                <img alt="" className="w-11 h-11 border cursor-pointer rounded-full dark:bg-gray-500 dark:border-gray-300" src={user?.photoURL} />
                 </div>
             }
             

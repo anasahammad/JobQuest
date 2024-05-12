@@ -113,7 +113,7 @@ const AppliedJob = () => {
     
     return (
         
-        <section className="container px-4 mx-auto">
+        <section className="container px-4 mx-auto my-10">
         <div className="sm:flex sm:items-center sm:justify-between">
             <h2 className="text-lg font-medium  dark:text-white">All Applied Jobs</h2>
             <select
@@ -129,9 +129,9 @@ const AppliedJob = () => {
             </select>
             <div className="flex items-center mt-4 gap-x-3">
 
-                <PDFDownloadLink document={<PDFDocument></PDFDocument>} fileName="applied_jobs_summary.pdf"> 
+                <PDFDownloadLink document={<PDFDocument></PDFDocument>} fileName={`applied_jobs_summary of ${user?.displayName} .pdf`}> 
                         
-                <button  className="w-1/2 px-5 py-2 text-sm  transition-colors duration-200  border rounded-lg sm:w-auto dark:hover:bg-gray-800 dark:bg-gray-900 hover:bg-gray-100 dark:text-white dark:border-gray-700">
+                <button  className="  px-5 py-2 text-sm  transition-colors duration-200  border rounded-lg  dark:hover:bg-gray-800  hover:bg-gray-100  dark:border-gray-700">
                Download PDF
             </button>
     </PDFDownloadLink>
