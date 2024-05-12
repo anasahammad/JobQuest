@@ -2,16 +2,39 @@ import { useQuery } from "@tanstack/react-query";
 import { FaChevronDown } from "react-icons/fa";
 import axios from "axios";
 import { HashLoader } from "react-spinners";
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
+import { useEffect, useState } from "react";
 const AllJobs = () => {
-  const { isPending, data: jobs } = useQuery({
+    const {count} = useLoaderData()
+    const [itemsPerPage, setItemsPerPage] = useState(5)
+    const [currentPage, setCurrentPage] = useState(1)
+    const numberOfPage = Math.ceil(count / itemsPerPage)
+    const pages = [...Array(numberOfPage).keys().map(page=> page + 1 )]
+    console.log(pages);
+   
+  const { isPending, data: jobs, refetch } = useQuery({
     queryKey: ["jobs"],
     queryFn: async () => {
-      const res = await axios("http://localhost:5000/jobs");
+      const res = await axios(`http://localhost:5000/jobs?page=${currentPage}&size=${itemsPerPage}`);
       return res.data;
     },
   });
- 
+  
+  useEffect(()=>{
+    refetch()
+  }, [currentPage, itemsPerPage, refetch])
+
+  const handlePrev = ()=>{
+    if(currentPage > 0){
+        setCurrentPage(currentPage - 1)
+    }
+  }
+
+  const handleNext = ()=>{
+    if(currentPage < pages.length){
+        setCurrentPage( currentPage + 1)
+    }
+  }
 
   if (isPending) return (
       <div className="flex justify-center items-center min-h-screen">
@@ -76,7 +99,7 @@ const AllJobs = () => {
                   type="checkbox"
                   className="text-blue-500 border-gray-300 rounded dark:bg-gray-900 dark:ring-offset-gray-900 dark:border-gray-700 h-4 w-8"
                 />
-                <span>On Site ({jobs.filter(job=> job.category === 'On Site').length})</span>
+                <span>On Site ({jobs?.filter(job=> job.category === 'On Site').length})</span>
               </div>
               <div className="flex items-center gap-x-3">
                 <div></div>
@@ -84,7 +107,7 @@ const AllJobs = () => {
                   type="checkbox"
                   className="text-blue-500 border-gray-300 rounded dark:bg-gray-900 dark:ring-offset-gray-900 dark:border-gray-700 h-4 w-8"
                 />
-                <span>Remote ({jobs.filter(job=> job.category === 'Remote').length})</span>
+                <span>Remote ({jobs?.filter(job=> job.category === 'Remote').length})</span>
               </div>
               <div className="flex items-center gap-x-3">
                 <div></div>
@@ -92,7 +115,7 @@ const AllJobs = () => {
                   type="checkbox"
                   className="text-blue-500 border-gray-300 rounded dark:bg-gray-900 dark:ring-offset-gray-900 dark:border-gray-700 h-4 w-8"
                 />
-                <span>Hybrid ({jobs.filter(job=> job.category === 'Hybrid').length})</span>
+                <span>Hybrid ({jobs?.filter(job=> job.category === 'Hybrid').length})</span>
               </div>
               <div className="flex items-center gap-x-3">
                 <div></div>
@@ -100,7 +123,7 @@ const AllJobs = () => {
                   type="checkbox"
                   className="text-blue-500 border-gray-300 rounded dark:bg-gray-900 dark:ring-offset-gray-900 dark:border-gray-700 h-4 w-8"
                 />
-                <span>Part Time ({jobs.filter(job=> job.category === 'Part Time').length})</span>
+                <span>Part Time ({jobs?.filter(job=> job.category === 'Part Time').length})</span>
               </div>
             </div>
             <div className="">
@@ -145,7 +168,7 @@ const AllJobs = () => {
           </div>
 
           <div className="md:w-3/4 space-y-4">
-            {jobs.map((job) => (
+            {jobs?.map((job) => (
               <div key={job._id} className="border">
                 <div className="flex  justify-between flex-col md:flex-row p-3 md:p-6 md:space-y-6 overflow-hidden rounded-md shadow-md dark:bg-gray-50 dark:text-gray-800">
                   <div className="flex space-x-4">
@@ -195,6 +218,28 @@ const AllJobs = () => {
                 </div>
               </div>
             ))}
+
+{/* Pagination */}
+<div className="flex justify-center">
+    
+    <button disabled={currentPage === 1} onClick={handlePrev} className="flex items-center justify-center px-4 py-2 mx-1 text-gray-500 capitalize bg-white rounded-md  rtl:-scale-x-100 dark:bg-gray-800 dark:text-gray-600">
+        <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+            <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
+        </svg>
+    </button>
+        {
+            pages?.map(page=> <button onClick={()=>setCurrentPage(page)} key={page} href="#" className={`hidden px-4 py-2 mx-1 text-gray-700 transition-colors duration-300 transform  rounded-md sm:inline dark:bg-gray-800 dark:text-gray-200 hover:bg-blue-500 dark:hover:bg-blue-500 hover:text-white dark:hover:text-gray-200 ${currentPage === page? 'bg-blue-500 text-white' : 'bg-white'}`}>
+                {page}
+            </button>)
+        }
+    
+
+    <button onClick={()=>handleNext()} className="flex items-center justify-center px-4 py-2 mx-1 text-gray-700 transition-colors duration-300 transform bg-white rounded-md rtl:-scale-x-100 dark:bg-gray-800 dark:text-gray-200 hover:bg-blue-500 dark:hover:bg-blue-500 hover:text-white dark:hover:text-gray-200">
+        <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+            <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+        </svg>
+    </button>
+</div>
           </div>
         </div>
       </div>
