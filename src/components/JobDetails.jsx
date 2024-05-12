@@ -8,7 +8,7 @@ import ModalPopup from "./ModalPopup";
 const JobDetails = () => {
     const {id} = useParams()
     const [isOpen, setIsOpen] = useState(false);
-    const { isPending ,data: jobs = [] } = useQuery({
+    const { isPending ,data: jobs = [], refetch } = useQuery({
         queryKey: ["jobs"],
         queryFn: async () => {
           const res = await axios("http://localhost:5000/jobs");

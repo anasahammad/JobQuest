@@ -31,7 +31,7 @@ const JobCard = ({job}) => {
 
     <div   className="mt-2">
         <a href="#"   className="text-xl font-bold    dark:text-white hover:  dark:hover:text-gray-200 hover:underline" tabIndex="0" role="link">{jobTitle}</a>
-        <p   className="mt-2   dark:text-gray-300">{description.substring(0, 40)} </p>
+        <p   className="mt-2   dark:text-gray-300">{description?.substring(0, 40)} </p>
     </div>
 
         <div className="">

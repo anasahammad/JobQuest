@@ -2,9 +2,10 @@ import { useState } from "react";
 import useAuth from "../hooks/useAuth";
 import Swal from "sweetalert2";
 import axios from 'axios'
+import { useNavigate } from "react-router-dom";
 const ModalPopup = ({closeModal, isOpen, openModal, singleJob}) => {
   const {user} = useAuth()
-
+const navigate = useNavigate()
   const { jobTitle,postingDate, deadline, min_salary, max_salary,applicants, description, category, jobOwner, _id, pictureURL } = singleJob || {}
   console.log(deadline);
   const handleFormSubmit = event =>{
@@ -17,13 +18,14 @@ const ModalPopup = ({closeModal, isOpen, openModal, singleJob}) => {
         return Swal.fire({
             icon: "error",
             title: "Oops...",
-            text: `You cannot applied your own job!😉;`,
+            text: `You cannot applied on your own job!😉;`,
             footer: '<a href="#">Why do I have this issue?</a>'
           });
     }
     const name = form.name.value
     const resume = form.resume.value;
     const currentDate = Date.now()
+    const appliedAt = new Date().toLocaleDateString()
     if(currentDate > new Date(deadline).getTime()) {
         return Swal.fire({
             icon: "error",
@@ -37,12 +39,16 @@ const ModalPopup = ({closeModal, isOpen, openModal, singleJob}) => {
     const employeData = {
         jobId,
         email,
+        jobTitle,
         name,
         resume,
         currentDate,
         jobOwner,
         category,
         applicants,
+        min_salary,
+         max_salary,
+         appliedAt,
         jobOwner_email : jobOwner?.email
 
     }
@@ -57,15 +63,17 @@ const ModalPopup = ({closeModal, isOpen, openModal, singleJob}) => {
             icon: "success"
           });
           form.reset()
-        //   navigate("/my-jobs")
+          navigate("/applied-jobs")
     })
     .catch((error)=>{
         Swal.fire({
             icon: "error",
             title: "Oops...",
-            text: `${error.message}`,
+            text: `${error.response
+              .data}`,
             footer: '<a href="#">Why do I have this issue?</a>'
           });
+          console.log(error);
     })
   }
 
