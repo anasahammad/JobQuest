@@ -3,6 +3,7 @@ import Banner from "../components/banner/Banner";
 import ExploreCategories from "../components/ExploreCategories";
 
 import TabCategories from "../components/TabCategories";
+import Testimonial from "../components/testimonial/Testimonial";
 
 
 const Home = () => {
@@ -11,6 +12,7 @@ const Home = () => {
             <Banner/>
             <TabCategories/>
            <ExploreCategories/>
+           <Testimonial/>
         </div>
     );
 };
