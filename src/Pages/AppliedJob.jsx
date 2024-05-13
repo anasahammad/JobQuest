@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 
 
 
+
 const AppliedJob = () => {
     const {user} = useAuth()
     const [filter, setFilter] = useState('')
@@ -139,7 +140,7 @@ useEffect(()=>{
                 <PDFDownloadLink document={<PDFDocument></PDFDocument>} fileName={`applied_jobs_summary of ${user?.displayName} .pdf`}> 
                         
                 <button  className="  px-5 py-2 text-sm  transition-colors duration-200  border rounded-lg  dark:hover:bg-gray-800  hover:bg-gray-100  dark:border-gray-700">
-               Download PDF
+              Download Summary
             </button>
     </PDFDownloadLink>
               
@@ -157,7 +158,7 @@ useEffect(()=>{
                                     <th scope="col" className="py-3.5 px-4 text-sm font-normal text-left rtl:text-right  dark:text-gray-400">
                                         
                                            
-                                            <span>Job Title</span>
+                                           Job Title
                                         
                                     </th>
     
