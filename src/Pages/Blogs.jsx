@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import expressjs from "../assets/images/download.jfif"
 
 const Blogs = () => {
     return (
@@ -47,17 +48,16 @@ const Blogs = () => {
             </div>
 
             <div>
-                <img className="object-cover object-center w-full h-64 rounded-lg lg:h-80" src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" alt=""/>
+                <img className="object-cover object-center w-full h-64 rounded-lg lg:h-80" src={expressjs} alt=""/>
 
                 <div className="mt-8">
-                    <span className="text-blue-500 uppercase">category</span>
+                    <span className="text-blue-500 uppercase">Express Js</span>
 
                     <h1 className="mt-4 text-xl font-semibold text-gray-800 dark:text-white">
-                        All the features you want to know</h1>
+                    What is express js?</h1>
 
                     <p className="mt-2 text-gray-500 dark:text-gray-400">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam est asperiores vel, ab animi
-                        recusandae nulla veritatis id tempore sapiente
+                    Express.js is the most popular web framework for Node.js. It is designed for building web applications and APIs and has been called the de facto standard server framework for Node.js.
                     </p>
 
                     <div className="flex items-center justify-between mt-4">
@@ -69,7 +69,7 @@ const Blogs = () => {
                             <p className="text-sm text-gray-500 dark:text-gray-400">February 6, 2022</p>
                         </div>
 
-                        <a href="#" className="inline-block text-blue-500 underline hover:text-blue-400">Read more</a>
+                        <Link to="/express" className="inline-block text-blue-500 underline hover:text-blue-400">Read more</Link>
                     </div>
 
                 </div>
