@@ -3,10 +3,10 @@ import expressjs from "../assets/images/download.jfif"
 
 const Blogs = () => {
     return (
-        <section className="bg-white dark:bg-gray-900">
+        <section className=" ">
     <div className="container px-6 py-10 mx-auto">
         <div className="flex items-center justify-between">
-            <h1 className="text-2xl font-semibold text-gray-800 capitalize lg:text-3xl dark:text-white">recent blogs </h1>
+            <h1 className="text-2xl font-semibold  capitalize lg:text-3xl dark:text-white">recent blogs </h1>
 
             <button className="focus:outline-none">
                 <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 text-gray-600 transition-colors duration-300 transform dark:text-gray-400 hover:text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -24,21 +24,21 @@ const Blogs = () => {
                 <div className="mt-8">
                     <span className="text-blue-500 uppercase">Server</span>
 
-                    <h1 className="mt-4 text-xl font-semibold text-gray-800 dark:text-white">
+                    <h1 className="mt-4 text-xl font-semibold  dark:text-white">
                     What is an access token and refresh token?
                     </h1>
 
-                    <p className="mt-2 text-gray-500 dark:text-gray-400">
+                    <p className="mt-2  dark:text-gray-400">
                     A careful balance between security and user experience is essential for authentication and authorization. 
                     </p>
 
                     <div className="flex items-center justify-between mt-4">
                         <div>
-                            <a href="#" className="text-lg font-medium text-gray-700 dark:text-gray-300 hover:underline hover:text-gray-500">
+                            <a href="#" className="text-lg font-medium  dark:text-gray-300 hover:underline hover:">
                                 Anas Ahammad
                             </a>
 
-                            <p className="text-sm text-gray-500 dark:text-gray-400">May 13, 2024</p>
+                            <p className="text-sm  dark:text-gray-400">May 13, 2024</p>
                         </div>
 
                         <Link to='/token' className="inline-block text-blue-500 underline hover:text-blue-400">Read more</Link>
@@ -53,20 +53,20 @@ const Blogs = () => {
                 <div className="mt-8">
                     <span className="text-blue-500 uppercase">Express Js</span>
 
-                    <h1 className="mt-4 text-xl font-semibold text-gray-800 dark:text-white">
+                    <h1 className="mt-4 text-xl font-semibold  dark:text-white">
                     What is express js?</h1>
 
-                    <p className="mt-2 text-gray-500 dark:text-gray-400">
+                    <p className="mt-2  dark:text-gray-400">
                     Express.js is the most popular web framework for Node.js. It is designed for building web applications and
                     </p>
 
                     <div className="flex items-center justify-between mt-4">
                         <div>
-                            <a href="#" className="text-lg font-medium text-gray-700 dark:text-gray-300 hover:underline hover:text-gray-500">
+                            <a href="#" className="text-lg font-medium  dark:text-gray-300 hover:underline hover:text-gray-500">
                                 Anas Ahammad
                             </a>
 
-                            <p className="text-sm text-gray-500 dark:text-gray-400">April 18, 2024</p>
+                            <p className="text-sm dark:text-gray-400">April 18, 2024</p>
                         </div>
 
                         <Link to="/express" className="inline-block text-blue-500 underline hover:text-blue-400">Read more</Link>
@@ -81,21 +81,21 @@ const Blogs = () => {
                 <div className="mt-8">
                     <span className="text-blue-500 uppercase">Nest js</span>
 
-                    <h1 className="mt-4 text-xl font-semibold text-gray-800 dark:text-white">
+                    <h1 className="mt-4 text-xl font-semibold  dark:text-white">
                     What is Nest JS?
                     </h1>
 
-                    <p className="mt-2 text-gray-500 dark:text-gray-400">
+                    <p className="mt-2 dark:text-gray-400">
                     In the world of server-side JavaScript development, Node.js has redefined how web applications are built. It’s known for its scalability, 
                     </p>
 
                     <div className="flex items-center justify-between mt-4">
                         <div>
-                            <a href="#" className="text-lg font-medium text-gray-700 dark:text-gray-300 hover:underline hover:text-gray-500">
+                            <a href="#" className="text-lg font-medium  dark:text-gray-300 hover:underline hover:text-gray-500">
                              Anas Ahammad
                             </a>
 
-                            <p className="text-sm text-gray-500 dark:text-gray-400">May 5, 2024</p>
+                            <p className="text-sm dark:text-gray-400">May 5, 2024</p>
                         </div>
 
                         <Link to='/nest-js' className="inline-block text-blue-500 underline hover:text-blue-400">Read more</Link>
