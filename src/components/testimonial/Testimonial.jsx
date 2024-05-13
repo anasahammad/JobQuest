@@ -12,9 +12,9 @@ import Testimonial4 from "./Testimonial4";
 const Testimonial = () => {
     return (
         <div>
-           <section className="bg-white dark:bg-gray-900">
+           <section className=" dark:bg-gray-900">
     <div className="container px-6 py-10 mx-auto">
-        <h1 className="text-2xl font-semibold text-center text-gray-800 capitalize lg:text-3xl dark:text-white">
+        <h1 className="text-2xl font-semibold text-center  capitalize lg:text-3xl dark:text-white">
             What clients saying
         </h1>
 
