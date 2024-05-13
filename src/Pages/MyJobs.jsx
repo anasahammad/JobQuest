@@ -9,7 +9,7 @@ const MyJobs = () => {
     const {isPending,data: jobs, refetch} = useQuery({
         queryKey: ['jobs'],
         queryFn: async ()=>{
-            const res = await axios(`http://localhost:5000/jobs/${user?.email}`)
+            const res = await axios(`http://localhost:5000/jobs/${user?.email}`, {withCredentials: true})
             return res.data
         }
     })

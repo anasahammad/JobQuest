@@ -13,6 +13,7 @@ import Blogs from "../Pages/Blogs";
 import AppliedJob from "../Pages/AppliedJob";
 import UpdateJob from "../Pages/UpdateJob";
 import JobDetails from "../components/JobDetails";
+import AccessTokenDetails from "../Pages/AccessTokenDetails";
 
 
 const router = createBrowserRouter([ 
@@ -71,6 +72,11 @@ const router = createBrowserRouter([
         {
             path: "/register",
             element: <Register/>
+        }
+        ,
+        {
+            path: "/token",
+            element: <AccessTokenDetails/>
         }
         ,
         

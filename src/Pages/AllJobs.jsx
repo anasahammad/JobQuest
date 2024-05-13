@@ -222,7 +222,7 @@ const AllJobs = () => {
                         {job.jobTitle}
                       </a>
                       <span className="text-sm dark:text-gray-600">
-                        Job-owner: {job.jobOwner.name}
+                        Post At: {new Date(job.postingDate).toLocaleDateString()}
                       </span>
 
                       <div className="grid grid-cols-1 md:grid-cols-3 md:gap-8">
