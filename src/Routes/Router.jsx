@@ -15,6 +15,7 @@ import UpdateJob from "../Pages/UpdateJob";
 import JobDetails from "../components/JobDetails";
 import AccessTokenDetails from "../Pages/AccessTokenDetails";
 import Expressjs from "../Pages/Expressjs";
+import NestJS from "../Pages/NestJS";
 
 
 const router = createBrowserRouter([ 
@@ -83,6 +84,11 @@ const router = createBrowserRouter([
         {
             path: "/express",
             element: <Expressjs/>
+        }
+        ,
+        {
+            path: "/nest-js",
+            element: <NestJS/>
         }
         ,
         
