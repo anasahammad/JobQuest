@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
-import bgImage from '../../assets/images/bg1.avif'
+import bgImage from '../../assets/images/bg2.jpg'
 import { motion } from 'framer-motion';
-const Slider1 = () => {
+
+
+const Slider2 = () => {
     return (
         <div>
             <div className="w-full bg-center bg-cover h-[38rem]" 
@@ -42,4 +44,4 @@ const Slider1 = () => {
     );
 };
 
-export default Slider1;
+export default Slider2;
