@@ -1,6 +1,7 @@
 
 import Banner from "../components/banner/Banner";
-import ModalPopup from "../components/ModalPopup";
+import ExploreCategories from "../components/ExploreCategories";
+
 import TabCategories from "../components/TabCategories";
 
 
@@ -9,7 +10,7 @@ const Home = () => {
         <div>
             <Banner/>
             <TabCategories/>
-            <ModalPopup/>
+           <ExploreCategories/>
         </div>
     );
 };

@@ -60,7 +60,7 @@ export default function TabCategories() {
   if (isPending) return <div className="flex justify-center items-center min-h-screen"><HashLoader color="#6A38C2" /></div>;
 
   return (
-    <div className="  px-4 mx-auto ">
+    <div className="  px-4 mx-auto my-16">
       <div className="text-center">
         <h1 className="text-3xl font-bold">Browse Jobs By Categories</h1>
         <p className="my-4">

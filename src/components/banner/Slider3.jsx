@@ -12,7 +12,7 @@ const Slider3 = () => {
             <div className="text-center">
                 <motion.h1 initial={{ opacity: 0, x: -100 }}
         animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1 }}
+        transition={{ duration: 1, repeat: Infinity, repeatDelay: 2 }}
         style={{ fontFamily: 'Arial',  }}>
                 
         <h1 className="text-3xl font-semibold text-white lg:text-5xl">Find Your   <span className="text-blue-400">Dream</span> With JobQuest</h1>
@@ -20,7 +20,7 @@ const Slider3 = () => {
                 
                 <motion.p  initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, delay: 0.5 }}
+        transition={{ duration: 1, delay: 0.5, repeat: Infinity, repeatDelay: 2 }}
         >
                 <p className="text-white xl:text-[18px]">We help you find exciting opportunities around the world. Have the latest openings <br /> at your fingertips. Start your journey with JobQuest</p>
                 </motion.p>
