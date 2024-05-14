@@ -87,7 +87,7 @@ const Navbar = () => {
         </div>
 
         {/* <!-- Mobile Menu open: "block", Menu closed: "hidden" --> */}
-        <div  className={`absolute inset-x-0 z-20 w-full px-6 py-4 transition-all duration-300 ease-in-out bg-base-100 dark:bg-blue-500  lg:top-0 lg:relative lg:bg-transparent lg:w-auto lg:opacity-100 lg:translate-x-0 lg:flex lg:items-center ${isOpen ? 'block' : 'hidden'}`}>
+        <div  className={`absolute inset-x-0 z-20 w-full px-6 py-4 transition-all duration-300 ease-in-out bg-base-100   lg:top-0 lg:relative lg:bg-transparent lg:w-auto lg:opacity-100 lg:translate-x-0 lg:flex lg:items-center ${isOpen ? 'block' : 'hidden'}`}>
           
             <div className="flex flex-col lg:items-center lg:flex-row lg:mx-6">
                 <Link to="/" className="my-2   transition-colors duration-300 transform hover:text-[#6A38C2]  md:mx-4 md:my-0">Home</Link>

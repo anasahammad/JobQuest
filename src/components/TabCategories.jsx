@@ -8,6 +8,7 @@ import JobCard from "./JobCard";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { HashLoader } from "react-spinners";
+import {motion} from 'framer-motion'
 
 
 function CustomTabPanel(props) {
@@ -63,11 +64,27 @@ export default function TabCategories() {
   return (
     <div className="  px-4 mx-auto my-16">
       <div className="text-center">
-        <h1 className="text-3xl font-bold">Browse Jobs By Categories</h1>
-        <p className="my-4">
+        <motion.h1 initial={{y: 50, opacity: 0}}
+        whileInView={{y: 0, opacity: 1}}
+        transition={{
+                delay: 0.4,
+                y: {type: "spring", stiffness: 60},
+                opacity: {duration: 0.2},
+                ease: "easeIn",
+                duration: 1,
+        }} className="text-3xl font-bold">Browse Jobs By Categories</motion.h1>
+        <motion.p initial={{x: 100, opacity: 0}}
+         whileInView={{x: 0, opacity: 1}}
+         transition={{
+                 delay: 0.4,
+                 x: {type: "spring", stiffness: 60},
+                 opacity: {duration: 0.2},
+                 ease: "easeIn",
+                 duration: 1,
+         }} className="my-4">
           Explore jobs by the categories of On site, Remote, Hybrid and Part
           time job.
-        </p>
+        </motion.p>
       </div>
       <div className="flex justify-center items-center">
         <Box sx={{ width: "100%", margin: "0 auto" }}>

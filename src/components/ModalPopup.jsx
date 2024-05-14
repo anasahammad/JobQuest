@@ -54,7 +54,7 @@ const navigate = useNavigate()
     }
     console.log(employeData)
 
-    axios.post('http://localhost:5000/applied', employeData )
+    axios.post('https://jobquest-server-pi.vercel.app/applied', employeData )
     .then(res=>{
         console.log(res.data);
         Swal.fire({
@@ -152,7 +152,7 @@ const navigate = useNavigate()
 
                   <label className="block mt-3" htmlFor="email">
                     <input
-                      type="text"
+                      type="url"
                       name="resume"
                       id="resume"
                         placeholder="Enter Your Resume link"
