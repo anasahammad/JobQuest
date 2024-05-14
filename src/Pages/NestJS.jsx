@@ -2,17 +2,17 @@
 
 const NestJS = () => {
     return (
-        <div className="max-w-4xl mx-auto my-6 p-6 overflow-hidden rounded-lg shadow dark:bg-gray-50 dark:text-gray-800">
+        <div className="max-w-4xl mx-auto my-6 p-6 overflow-hidden rounded-lg shadow ">
         <article>
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold">What is Nest.Js?</h2>
-            <p className="mt-4 dark:text-gray-600">Introduction: Nest.js: Unveiling the Power of a Node.js Framework
+            <p className="mt-4 ">Introduction: Nest.js: Unveiling the Power of a Node.js Framework
 
 In the world of server-side JavaScript development, Node.js has redefined how web applications are built. It’s known for its scalability, speed, and flexibility. But to harness the true potential of Node.js, you need a robust framework, and that’s where Nest.js comes into play.<a href="https://expressjs.com/">website</a>.</p>
             <div className="flex items-center mt-8 space-x-4">
-                <img src="https://lh3.googleusercontent.com/a/ACg8ocIHE_x1WXwqf6QXclnP92_gofzyaoyOGa0SvzLvAVs7iZmtRis=s96-c" alt="" className="w-10 h-10 rounded-full dark:bg-gray-500" />
+                <img src="https://lh3.googleusercontent.com/a/ACg8ocIHE_x1WXwqf6QXclnP92_gofzyaoyOGa0SvzLvAVs7iZmtRis=s96-c" alt="" className="w-10 h-10 rounded-full " />
                 <div>
                     <h3 className="text-sm font-medium">Anas Ahammad Sarker</h3>
-                    <time dateTime="2021-02-18" className="text-sm dark:text-gray-600">May 13th 2024</time>
+                    <time dateTime="2021-02-18" className="text-sm ">May 13th 2024</time>
                 </div>
             </div>
             <hr className="my-6" />

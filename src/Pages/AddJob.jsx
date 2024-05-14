@@ -38,7 +38,7 @@ const AddJob = () => {
         }
         
       
-        axios.post('http://localhost:5000/job', jobData  )
+        axios.post('https://jobquest-server-pi.vercel.app/job', jobData  )
         .then(res=>{
             console.log(res.data);
             Swal.fire({

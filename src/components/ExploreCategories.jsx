@@ -38,7 +38,7 @@ const ExploreCategories = () => {
       </div>
 
         <div className=" container mx-auto grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4  gap-5">
-        <div className="max-w-xs mx-auto p-6 rounded-md shadow-md dark:bg-gray-50 dark:text-gray-900">
+        <motion.div whileHover={{ scale: 1.2 }} className="max-w-xs mx-auto p-6 rounded-md shadow-md  ">
         <div >
                 <motion.p
                 initial={{y: 100, opacity: 0}}
@@ -75,7 +75,7 @@ const ExploreCategories = () => {
                         opacity: {duration: 0.2},
                         ease: "easeIn",
                         duration: 1,
-                }} className="dark:text-gray-800">You can view all popular jobs according your future careers.</motion.p>
+                }} className="">You can view all popular jobs according your future careers.</motion.p>
     
     <motion.p   initial={{y: 100, opacity: 0}}
                 whileInView={{y: 0, opacity: 1}}
@@ -87,8 +87,8 @@ const ExploreCategories = () => {
                         duration: 1,
                 }} className="text-xl font-semibold text-blue-400">122 Active Jobs</motion.p>
 
-</div>
-        <div className="max-w-xs mx-auto  p-6 rounded-md shadow-md dark:bg-gray-50 dark:text-gray-900">
+</motion.div>
+        <motion.div whileHover={{ scale: 1.2 }} className="max-w-xs mx-auto  p-6 rounded-md shadow-md  ">
         <div >
                 <motion.p 
                  initial={{y: 100, opacity: 0}}
@@ -126,7 +126,7 @@ const ExploreCategories = () => {
                         opacity: {duration: 0.2},
                         ease: "easeIn",
                         duration: 1,
-                }} className="dark:text-gray-800">You can view all popular jobs according your future careers.</motion.p>
+                }} className="">You can view all popular jobs according your future careers.</motion.p>
     
     <motion.p  initial={{y: 100, opacity: 0}}
                 whileInView={{y: 0, opacity: 1}}
@@ -138,8 +138,8 @@ const ExploreCategories = () => {
                         duration: 1,
                 }} className="text-xl font-semibold text-blue-400">85 Active Jobs</motion.p>
 
-</div>
-        <div className="max-w-xs mx-auto  p-6 rounded-md shadow-md dark:bg-gray-50 dark:text-gray-900">
+</motion.div>
+        <motion.div whileHover={{ scale: 1.2 }} className="max-w-xs mx-auto   p-6 rounded-md shadow-md  ">
         <div >
                 <motion.p  initial={{y: 50, opacity: 0}}
         whileInView={{y: 0, opacity: 1}}
@@ -167,7 +167,7 @@ const ExploreCategories = () => {
                 duration: 1,
         }} className="text-xl font-semibold tracking-wide">Business & Tech</motion.h2>
 	</div>
-	<p className="dark:text-gray-800">You can view all popular jobs according your future careers.</p>
+	<p className="">You can view all popular jobs according your future careers.</p>
     
     <motion.p initial={{y: 50, opacity: 0}}
         whileInView={{y: 0, opacity: 1}}
@@ -179,8 +179,8 @@ const ExploreCategories = () => {
                 duration: 1,
         }} className="text-xl font-semibold text-blue-400">25 Active Jobs</motion.p>
 
-</div>
-        <div className="max-w-xs mx-auto  p-6 rounded-md shadow-md dark:bg-gray-50 dark:text-gray-900">
+</motion.div>
+        <motion.div whileHover={{ scale: 1.2 }} className="max-w-xs mx-auto  p-6 rounded-md shadow-md  ">
         <div >
                 <motion.p 
                   initial={{y: 50, opacity: 0}}
@@ -216,7 +216,7 @@ const ExploreCategories = () => {
                 opacity: {duration: 0.2},
                 ease: "easeIn",
                 duration: 1.2,
-        }} className="dark:text-gray-800">You can view all popular jobs according your future careers.</motion.p>
+        }} className="">You can view all popular jobs according your future careers.</motion.p>
     
     <motion.p initial={{y: 50, opacity: 0}}
         whileInView={{y: 0, opacity: 1}}
@@ -228,8 +228,8 @@ const ExploreCategories = () => {
                 duration: 1.2,
         }} className="text-xl font-semibold text-blue-400">255 Active Jobs</motion.p>
 
-</div>
-        <div className="max-w-xs mx-auto  p-6 rounded-md shadow-md dark:bg-gray-50 dark:text-gray-900">
+</motion.div>
+        <motion.div whileHover={{ scale: 1.2 }} className="max-w-xs mx-auto  p-6 rounded-md shadow-md  ">
         <div >
                 <motion.p 
                 initial={{y: 50, opacity: 0}}
@@ -267,7 +267,7 @@ const ExploreCategories = () => {
                         opacity: {duration: 0.2},
                         ease: "easeIn",
                         duration: 1.2,
-                }} className="dark:text-gray-800">You can view all popular jobs according your future careers.</motion.p>
+                }} className="">You can view all popular jobs according your future careers.</motion.p>
     
     <motion.p initial={{y: 50, opacity: 0}}
                 whileInView={{y: 0, opacity: 1}}
@@ -279,8 +279,8 @@ const ExploreCategories = () => {
                         duration: 1.2,
                 }} className="text-xl font-semibold text-blue-400">90 Active Jobs</motion.p>
 
-</div>
-        <div className="max-w-xs mx-auto  p-6 rounded-md shadow-md dark:bg-gray-50 dark:text-gray-900">
+</motion.div>
+        <motion.div whileHover={{ scale: 1.2 }} className="max-w-xs mx-auto  p-6 rounded-md shadow-md  ">
         <div >
                 <motion.p  initial={{y: 50, opacity: 0}}
                 whileInView={{y: 0, opacity: 1}}
@@ -315,7 +315,7 @@ const ExploreCategories = () => {
                         opacity: {duration: 0.2},
                         ease: "easeIn",
                         duration: 1.2,
-                }} className="dark:text-gray-800">You can view all popular jobs according your future careers.</motion.p>
+                }} className="">You can view all popular jobs according your future careers.</motion.p>
     
     <motion.p initial={{y: 50, opacity: 0}}
                 whileInView={{y: 0, opacity: 1}}
@@ -327,8 +327,8 @@ const ExploreCategories = () => {
                         duration: 1.2,
                 }} className="text-xl font-semibold text-blue-400">65 Active Jobs</motion.p>
 
-</div>
-        <div className="max-w-xs mx-auto  p-6 rounded-md shadow-md dark:bg-gray-50 dark:text-gray-900">
+</motion.div>
+        <motion.div whileHover={{ scale: 1.2 }} className="max-w-xs mx-auto  p-6 rounded-md shadow-md  ">
         <div >
                 <motion.p initial={{y: 50, opacity: 0}}
                 whileInView={{y: 0, opacity: 1}}
@@ -363,7 +363,7 @@ const ExploreCategories = () => {
                         opacity: {duration: 0.2},
                         ease: "easeIn",
                         duration: 1.2,
-                }} className="dark:text-gray-800">You can view all popular jobs according your future careers.</motion.p>
+                }} className="">You can view all popular jobs according your future careers.</motion.p>
     
     <motion.p initial={{y: 50, opacity: 0}}
                 whileInView={{y: 0, opacity: 1}}
@@ -375,8 +375,8 @@ const ExploreCategories = () => {
                         duration: 1.2,
                 }} className="text-xl font-semibold text-blue-400">160 Active Jobs</motion.p>
 
-</div>
-        <div className="max-w-xs mx-auto p-6 rounded-md shadow-md dark:bg-gray-50 dark:text-gray-900">
+</motion.div>
+        <motion.div whileHover={{ scale: 1.2 }} className="max-w-xs mx-auto p-6 rounded-md shadow-md  ">
         <div >
                 <motion.p initial={{y: 50, opacity: 0}}
                 whileInView={{y: 0, opacity: 1}}
@@ -411,7 +411,7 @@ const ExploreCategories = () => {
                         opacity: {duration: 0.2},
                         ease: "easeIn",
                         duration: 1.2,
-                }} className="dark:text-gray-800">You can view all popular jobs according your future careers.</motion.p>
+                }} className="">You can view all popular jobs according your future careers.</motion.p>
     
     <motion.p initial={{y: 50, opacity: 0}}
                 whileInView={{y: 0, opacity: 1}}
@@ -423,7 +423,7 @@ const ExploreCategories = () => {
                         duration: 1.2,
                 }} className="text-xl font-semibold text-blue-400">120 Active Jobs</motion.p>
 
-</div>
+</motion.div>
         </div>
      
 

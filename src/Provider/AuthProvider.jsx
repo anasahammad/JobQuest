@@ -23,35 +23,31 @@ const AuthProvider = ({children}) => {
         return signInWithPopup(auth, googleProvider)
     }
     
-   
+   //https://jobquest-server-pi.vercel.app/jwt
     const signOutUser = ()=>{
         setLoading(true)
         return signOut(auth)
     }
-    useEffect(()=>{
-        const unsubscribe = onAuthStateChanged(auth, currentUser=>{
-            setUser(currentUser)
-            console.log(currentUser);
-            const userEmail = currentUser?.email || user?.email
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, currentUser => {
+            const userEmail = currentUser?.email || user?.email;
             const loggedUser = {email: userEmail}
-
-            setLoading(false)
+            setUser(currentUser);
+            console.log('current user', currentUser);
+            setLoading(false);
             if(currentUser){
-                axios.post('http://localhost:5000/jwt', loggedUser, {withCredentials: true})
-                .then(res=>{
-                    console.log('token is come', res.data);
-                })
+                axios.post('https://jobquest-server-pi.vercel.app/jwt', loggedUser, {withCredentials: true})
+                .then(res=> console.log(res.data))
             }
             else{
-                axios.post('http://localhost:5000/logout', loggedUser, {withCredentials: true})
+                axios.post('https://jobquest-server-pi.vercel.app/logout',loggedUser, {withCredentials:true} )
                 .then(res=> console.log(res.data))
             }
         });
-        return ()=> {
-            unsubscribe();
+        return () => {
+            return unsubscribe();
         }
-
-    }, [])
+    }, [user?.email])
     const authInfo = {
         createUser,
         signInUser,

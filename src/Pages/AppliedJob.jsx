@@ -15,7 +15,7 @@ const AppliedJob = () => {
     const {isPending, data: jobs, refetch} = useQuery({
         queryKey: ['jobs'],
         queryFn: async ()=>{
-            const res = await axios(`http://localhost:5000/applied-jobs/${user?.email}?filter=${filter}`, {withCredentials: true})
+            const res = await axios(`https://jobquest-server-pi.vercel.app/applied-jobs/${user?.email}?filter=${filter}`, {withCredentials: true})
             return res.data;
 
         }

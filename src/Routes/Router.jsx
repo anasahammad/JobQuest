@@ -31,7 +31,7 @@ const router = createBrowserRouter([
         {
             path: "/all-jobs",
             element: <AllJobs/>,
-            loader: ()=>fetch('http://localhost:5000/counts')
+            loader: ()=>fetch('https://jobquest-server-pi.vercel.app/counts')
         },
         
         {
@@ -57,13 +57,13 @@ const router = createBrowserRouter([
         {
             path: "/details/:id",
             element: <PrivateRoutes><JobDetails/></PrivateRoutes>,
-            loader: ({params})=>fetch(`http://localhost:5000/jobs/${params.id}`)
+            loader: ({params})=>fetch(`https://jobquest-server-pi.vercel.app/jobs/${params.id}`)
         }
         ,
         {
             path: "/update/:id",
             element: <PrivateRoutes><UpdateJob/></PrivateRoutes>,
-            loader: ({params})=>fetch(`http://localhost:5000/job/${params.id}`)
+            loader: ({params})=>fetch(`https://jobquest-server-pi.vercel.app/job/${params.id}`)
         }
         ,
         {
