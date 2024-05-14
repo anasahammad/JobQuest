@@ -37,7 +37,7 @@ const JobCard = ({job}) => {
         <div className="">
             <div className="flex flex-col lg:flex-row  justify-between lg:items-center">
             <p className='mt-2 text-sm font-bold  '>
-          Range: ${min_salary} - ${max_salary}
+          Salary: ${min_salary} - ${max_salary}
 
         </p>
         <p   className="text-sm font-light   dark:text-gray-400">Deadline: {new Date(deadline).toLocaleDateString()}</p>
