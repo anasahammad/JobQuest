@@ -127,8 +127,8 @@ const AllJobs = () => {
       </div>
 
       <div className="mt-10"> 
-        <div className="flex px-4 md:items-start flex-col md:flex-row gap-16 ">
-          <div className="grid grid-cols-1 md:gap-6">
+        <div className="flex px-4 items-center md:items-start flex-col md:flex-row gap-16 ">
+          <div className="grid grid-cols-1  md:gap-6">
             <div className="">
               <div className="flex gap-4 lg:justify-between items-center mb-4">
                 <h4 className="font-bold ">Categories</h4>
@@ -210,10 +210,10 @@ const AllJobs = () => {
           </div>
 
            
-          <div className="lg:w-3/4 space-y-4">
+          <div className="xl:w-3/4 w-full space-y-4">
             {jobs?.map((job) => (
               <div key={job._id} className="border">
-                <div className="flex  justify-between flex-col md:flex-row p-3 md:p-6 md:space-y-6 overflow-hidden rounded-md lg:shadow-md  ">
+                <div className="flex items-center justify-between flex-col md:flex-row p-3 md:p-6 md:space-y-6 overflow-hidden rounded-md lg:shadow-md  ">
                   <div className="flex space-x-4">
                     <img
                       alt=""

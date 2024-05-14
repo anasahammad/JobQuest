@@ -124,7 +124,7 @@ export default function TabCategories() {
             </Tabs>
           </Box>
           <CustomTabPanel value={value} index={0}>
-            <div className="grid grid-cols-1 gap-6  md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid grid-cols-1 gap-6  md:grid-cols-2 xl:grid-cols-3">
               {jobs
                 .filter((job) => job.category === "On Site")
                 .map((job) => (
@@ -133,7 +133,7 @@ export default function TabCategories() {
             </div>
           </CustomTabPanel>
           <CustomTabPanel value={value} index={1}>
-            <div className="grid grid-cols-1 gap-3  md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid grid-cols-1 gap-3  md:grid-cols-2 xl:grid-cols-3">
               {jobs
                 .filter((job) => job.category === "Remote")
                 .map((job) => (
@@ -142,7 +142,7 @@ export default function TabCategories() {
             </div>
           </CustomTabPanel>
           <CustomTabPanel value={value} index={2}>
-            <div className="grid grid-cols-1 gap-3  md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid grid-cols-1 gap-3  md:grid-cols-2 xl:grid-cols-3">
               {jobs
                 .filter((job) => job.category === "Hybrid")
                 .map((job) => (
@@ -151,7 +151,7 @@ export default function TabCategories() {
             </div>
           </CustomTabPanel>
           <CustomTabPanel value={value} index={3}>
-            <div className="grid grid-cols-1 gap-3  md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid grid-cols-1 gap-3  md:grid-cols-2 xl:grid-cols-3">
               {jobs
                 .filter((job) => job.category === "Part Time")
                 .map((job) => (
@@ -160,7 +160,7 @@ export default function TabCategories() {
             </div>
           </CustomTabPanel>
           <CustomTabPanel value={value} index={4}>
-          <div className="grid grid-cols-1 gap-3  md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-3  md:grid-cols-2 xl:grid-cols-3">
               {jobs
                 .map((job) => (
                   <JobCard key={job._id} job={job} />

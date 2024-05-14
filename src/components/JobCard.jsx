@@ -46,12 +46,7 @@ const JobCard = ({job}) => {
 
         </div>
     <div   className="flex flex-col-reverse lg:flex-row lg:items-center justify-between mt-4">
-        <Link to={ `/details/${_id}`}     className="text-blue-600 dark:text-blue-400 hover:underline" tabIndex="0" role="link"> <motion.button 
-                     whileHover={{ scale: 1.1 }}
-                     whileTap={{ scale: 0.9 }}
-                     onClick={handleViewDetails}
-                     className=" px-5 py-2 mt-4 text-sm font-medium text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-md lg:w-auto hover:bg-blue-500 focus:outline-none focus:bg-blue-500"
-                    >View Details</motion.button>
+        <Link to={ `/details/${_id}`}   onClick={handleViewDetails}  className="text-blue-600  dark:text-blue-400 hover:underline" tabIndex="0" role="link"> View Details
 
                     </Link>
 

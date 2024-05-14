@@ -37,7 +37,7 @@ const ExploreCategories = () => {
         </motion.p>
       </div>
 
-        <div className=" container mx-auto grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4  gap-5">
+        <div className=" container mx-auto grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4  gap-5">
         <motion.div whileHover={{ scale: 1.1 }} className="max-w-xs mx-auto p-6 rounded-md shadow-md  ">
         <div >
                 <motion.p
