@@ -38,7 +38,7 @@ const ExploreCategories = () => {
       </div>
 
         <div className=" container mx-auto grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4  gap-5">
-        <motion.div whileHover={{ scale: 1.2 }} className="max-w-xs mx-auto p-6 rounded-md shadow-md  ">
+        <motion.div whileHover={{ scale: 1.1 }} className="max-w-xs mx-auto p-6 rounded-md shadow-md  ">
         <div >
                 <motion.p
                 initial={{y: 100, opacity: 0}}
@@ -88,7 +88,7 @@ const ExploreCategories = () => {
                 }} className="text-xl font-semibold text-blue-400">122 Active Jobs</motion.p>
 
 </motion.div>
-        <motion.div whileHover={{ scale: 1.2 }} className="max-w-xs mx-auto  p-6 rounded-md shadow-md  ">
+        <motion.div whileHover={{ scale: 1.1 }} className="max-w-xs mx-auto  p-6 rounded-md shadow-md  ">
         <div >
                 <motion.p 
                  initial={{y: 100, opacity: 0}}
@@ -139,7 +139,7 @@ const ExploreCategories = () => {
                 }} className="text-xl font-semibold text-blue-400">85 Active Jobs</motion.p>
 
 </motion.div>
-        <motion.div whileHover={{ scale: 1.2 }} className="max-w-xs mx-auto   p-6 rounded-md shadow-md  ">
+        <motion.div whileHover={{ scale: 1.1 }} className="max-w-xs mx-auto   p-6 rounded-md shadow-md  ">
         <div >
                 <motion.p  initial={{y: 50, opacity: 0}}
         whileInView={{y: 0, opacity: 1}}
@@ -180,7 +180,7 @@ const ExploreCategories = () => {
         }} className="text-xl font-semibold text-blue-400">25 Active Jobs</motion.p>
 
 </motion.div>
-        <motion.div whileHover={{ scale: 1.2 }} className="max-w-xs mx-auto  p-6 rounded-md shadow-md  ">
+        <motion.div whileHover={{ scale: 1.1 }} className="max-w-xs mx-auto  p-6 rounded-md shadow-md  ">
         <div >
                 <motion.p 
                   initial={{y: 50, opacity: 0}}
@@ -229,7 +229,7 @@ const ExploreCategories = () => {
         }} className="text-xl font-semibold text-blue-400">255 Active Jobs</motion.p>
 
 </motion.div>
-        <motion.div whileHover={{ scale: 1.2 }} className="max-w-xs mx-auto  p-6 rounded-md shadow-md  ">
+        <motion.div whileHover={{ scale: 1.1 }} className="max-w-xs mx-auto  p-6 rounded-md shadow-md  ">
         <div >
                 <motion.p 
                 initial={{y: 50, opacity: 0}}
@@ -280,7 +280,7 @@ const ExploreCategories = () => {
                 }} className="text-xl font-semibold text-blue-400">90 Active Jobs</motion.p>
 
 </motion.div>
-        <motion.div whileHover={{ scale: 1.2 }} className="max-w-xs mx-auto  p-6 rounded-md shadow-md  ">
+        <motion.div whileHover={{ scale: 1.1 }} className="max-w-xs mx-auto  p-6 rounded-md shadow-md  ">
         <div >
                 <motion.p  initial={{y: 50, opacity: 0}}
                 whileInView={{y: 0, opacity: 1}}
@@ -328,7 +328,7 @@ const ExploreCategories = () => {
                 }} className="text-xl font-semibold text-blue-400">65 Active Jobs</motion.p>
 
 </motion.div>
-        <motion.div whileHover={{ scale: 1.2 }} className="max-w-xs mx-auto  p-6 rounded-md shadow-md  ">
+        <motion.div whileHover={{ scale: 1.1 }} className="max-w-xs mx-auto  p-6 rounded-md shadow-md  ">
         <div >
                 <motion.p initial={{y: 50, opacity: 0}}
                 whileInView={{y: 0, opacity: 1}}
@@ -376,7 +376,7 @@ const ExploreCategories = () => {
                 }} className="text-xl font-semibold text-blue-400">160 Active Jobs</motion.p>
 
 </motion.div>
-        <motion.div whileHover={{ scale: 1.2 }} className="max-w-xs mx-auto p-6 rounded-md shadow-md  ">
+        <motion.div whileHover={{ scale: 1.1 }} className="max-w-xs mx-auto p-6 rounded-md shadow-md  ">
         <div >
                 <motion.p initial={{y: 50, opacity: 0}}
                 whileInView={{y: 0, opacity: 1}}

@@ -24,7 +24,7 @@ function CustomTabPanel(props) {
     >
       {value === index && (
         <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
+          <Typography >{children}</Typography>
         </Box>
       )}
     </div>
@@ -87,16 +87,18 @@ export default function TabCategories() {
         </motion.p>
       </div>
       <div className="flex justify-center items-center">
-        <Box sx={{ width: "100%", margin: "0 auto" }}>
+        <Box sx={{ width: "100%", margin: "0 auto"}}>
           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
             <Tabs
               className="overflow-x-auto"
               centered
               value={value}
+              
               onChange={handleChange}
               aria-label="basic tabs example"
               variant={window.innerWidth <= 768 ? "scrollable" : "standard"}
               scrollButtons="auto"
+              
             >
               <Tab label="On-Site Job" {...a11yProps(0)} />
               <Tab
@@ -104,9 +106,9 @@ export default function TabCategories() {
 "
                 {...a11yProps(1)}
               />
-              <Tab
+              <Tab 
                 label="Hybrid
-"
+"         
                 {...a11yProps(2)}
               />
               <Tab
@@ -122,7 +124,7 @@ export default function TabCategories() {
             </Tabs>
           </Box>
           <CustomTabPanel value={value} index={0}>
-            <div className="grid grid-cols-1 gap-3  md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid grid-cols-1 gap-6  md:grid-cols-2 lg:grid-cols-3">
               {jobs
                 .filter((job) => job.category === "On Site")
                 .map((job) => (

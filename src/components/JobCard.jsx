@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import Swal from "sweetalert2";
-
+import {motion} from 'framer-motion'
 
 const JobCard = ({job}) => {
     const { jobTitle,postingDate, deadline, min_salary, max_salary,applicants, description, category, jobOwner, _id } = job;
@@ -23,7 +23,7 @@ const JobCard = ({job}) => {
         }
     }
     return (
-        <div   className=" max-w-lg px-3 lg:px-8 py-4  rounded-lg shadow-md ">
+        <motion.div whileHover={{ scale: 1.1 }} className=" max-w-lg px-3 hover:scale-105 transition duration-100 lg:px-8 py-4  rounded-lg shadow-md ">
     <div   className="flex items-center  justify-between">
         <span   className="text-sm font-light   dark:text-gray-400">Date: {new Date(postingDate).toLocaleDateString()}</span>
         <a   className="px-3 py-1 text-sm font-bold text-gray-100 transition-colors duration-300 transform bg-gray-600 rounded cursor-pointer hover:bg-gray-500" tabIndex="0" role="button">Applied: {applicants}</a>
@@ -46,14 +46,21 @@ const JobCard = ({job}) => {
 
         </div>
     <div   className="flex flex-col-reverse lg:flex-row lg:items-center justify-between mt-4">
-        <Link to={ `/details/${_id}`}   onClick={handleViewDetails}  className="text-blue-600 dark:text-blue-400 hover:underline" tabIndex="0" role="link">View Details</Link>
+        <Link to={ `/details/${_id}`}     className="text-blue-600 dark:text-blue-400 hover:underline" tabIndex="0" role="link"> <motion.button 
+                     whileHover={{ scale: 1.1 }}
+                     whileTap={{ scale: 0.9 }}
+                     onClick={handleViewDetails}
+                     className=" px-5 py-2 mt-4 text-sm font-medium text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-md lg:w-auto hover:bg-blue-500 focus:outline-none focus:bg-blue-500"
+                    >View Details</motion.button>
+
+                    </Link>
 
         <div   className="flex items-center">
             
             <a   className="font-bold    cursor-pointer dark:text-gray-200" tabIndex="0" role="link">{jobOwner?.name}</a>
         </div>
     </div>
-</div>
+</motion.div>
     );
 };
 

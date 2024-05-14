@@ -20,21 +20,25 @@ const AllJobs = () => {
    
    
   const { isPending, data: jobs, refetch } = useQuery({
-    queryKey: ["jobs"],
+    queryKey: ["jobs", currentPage, itemsPerPage, filter, search],
     queryFn: async () => {
       const res = await axios(`https://jobquest-server-pi.vercel.app/jobs?page=${currentPage}&size=${itemsPerPage}&filter=${filter}&search=${search}`);
       return res.data;
+      
     },
+   
   });
   
   useEffect(()=>{
     refetch()
   }, [currentPage, itemsPerPage, refetch, filter, search])
 
-  
+  useEffect(()=>{
+    
+  }, [])
 
   const handlePrev = ()=>{
-    if(currentPage > 0){
+    if(currentPage > 1){
         setCurrentPage(currentPage - 1)
     }
   }
@@ -47,6 +51,7 @@ const AllJobs = () => {
   const handleSearch = e =>{
     e.preventDefault()
     setSearch(searchText)
+    setCurrentPage(1);
   }
 
 
@@ -85,7 +90,9 @@ const AllJobs = () => {
         <div className="flex flex-col md:flex-row items-center justify-center md:gap-10 px-4">
           <div className=" md:pt-8 md:w-2/4">
             <select
-           onChange={e =>setFilter(e.target.value)}
+           onChange={e =>{setFilter(e.target.value)
+            setCurrentPage(1)
+           }}
            value={filter}
              
               name="sort"
@@ -123,7 +130,7 @@ const AllJobs = () => {
         <div className="flex px-4 md:items-start flex-col md:flex-row gap-16 ">
           <div className="grid grid-cols-1 md:gap-6">
             <div className="">
-              <div className="flex justify-between items-center mb-4">
+              <div className="flex gap-4 lg:justify-between items-center mb-4">
                 <h4 className="font-bold ">Categories</h4>
                 <FaChevronDown className="cursor-pointer"></FaChevronDown>
               </div>
@@ -162,7 +169,7 @@ const AllJobs = () => {
               </div>
             </div>
             <div className="">
-              <div className="flex justify-between items-center mb-4">
+              <div className="flex gap-4 lg:justify-between items-center mb-4">
                 <h4 className="font-bold ">Salary Range</h4>
                 <FaChevronDown className="cursor-pointer"></FaChevronDown>
               </div>
