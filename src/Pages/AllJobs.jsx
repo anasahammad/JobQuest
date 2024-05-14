@@ -120,7 +120,7 @@ const AllJobs = () => {
       </div>
 
       <div className="mt-10"> 
-        <div className="flex px-4 md:items-start flex-col md:flex-row md:gap-16 ">
+        <div className="flex px-4 md:items-start flex-col md:flex-row gap-16 ">
           <div className="grid grid-cols-1 md:gap-6">
             <div className="">
               <div className="flex justify-between items-center mb-4">
@@ -203,32 +203,32 @@ const AllJobs = () => {
           </div>
 
            
-          <div className="md:w-3/4 space-y-4">
+          <div className="lg:w-3/4 space-y-4">
             {jobs?.map((job) => (
               <div key={job._id} className="border">
-                <div className="flex  justify-between flex-col md:flex-row p-3 md:p-6 md:space-y-6 overflow-hidden rounded-md shadow-md dark:bg-gray-50 dark:text-gray-800">
+                <div className="flex  justify-between flex-col md:flex-row p-3 md:p-6 md:space-y-6 overflow-hidden rounded-md lg:shadow-md  ">
                   <div className="flex space-x-4">
                     <img
                       alt=""
                       src={job.pictureURL}
-                      className="object-cover w-28 h-28 rounded-lg shadow dark:bg-gray-500"
+                      className="object-cover w-28 h-28 md:w-20 md:h-16 lg:w-28 lg:h-28 rounded-lg shadow "
                     />
                     <div className="flex flex-col space-y-1">
                       <a
                         rel="noopener noreferrer"
                         href="#"
-                        className=" text-xl font-semibold"
+                        className=" lg:text-xl font-semibold"
                       >
                         {job.jobTitle}
                       </a>
-                      <span className="text-sm dark:text-gray-600">
+                      <span className="text-sm ">
                         Post At: {new Date(job.postingDate).toLocaleDateString()}
                       </span>
 
-                      <div className="grid grid-cols-1 md:grid-cols-3 md:gap-8">
+                      <div className="grid grid-cols-1 gap-2 md:grid-cols-1 lg:grid-cols-3 xl:gap-8">
                         <p className="text-sm bg-[#56cdad1a] text-[#56CDAD] text-center rounded-[80px]">{job.category}</p>
 
-                        <p className="text-sm   rounded-[80px]  bg-[#FFB836] text-white text-center">Salary Range: ${job.min_salary} - ${job.max_salary}</p>
+                        <p className="text-sm md:text-[12px]   rounded-[80px]  bg-[#FFB836] text-white text-center">Salary: ${job.min_salary} - ${job.max_salary}</p>
                         <p className="text-sm bg-[#4640DE] text-[white] text-center rounded-[80px]">Deadline: {new Date(job.deadline).toLocaleDateString()}</p>
                       </div>
                     </div>
@@ -258,7 +258,7 @@ const AllJobs = () => {
 {/* Pagination */}
 <div className="flex justify-center">
     
-    <button disabled={currentPage === 1} onClick={handlePrev} className="flex items-center justify-center px-4 py-2 mx-1 text-gray-500 capitalize bg-white rounded-md  rtl:-scale-x-100 dark:bg-gray-800 hover:bg-blue-400 hover:text-white dark:text-gray-600">
+    <button disabled={currentPage === 1} onClick={handlePrev} className="flex items-center justify-center px-4 py-2 mx-1 text-gray-500 capitalize bg-white rounded-md  rtl:-scale-x-100 dark:bg-gray-800 hover:bg-blue-400 hover:text-white ">
         <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
             <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
         </svg>

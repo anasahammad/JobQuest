@@ -46,7 +46,7 @@ const Footer = () => {
                 <img className="w-auto h-7" src={logo} alt=""/>
                 <h4>JobQuest</h4>
             </a>
-            
+           
             <div className="flex -mx-2">
                 <a href="#" className="mx-2 transition-colors duration-300  hover:text-blue-500 dark:hover:text-blue-400" aria-label="Reddit">
                     <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24" fill="none"
@@ -76,6 +76,7 @@ const Footer = () => {
                 </Link>
             </div>
         </div>
+        <p className="mt-6 text-sm text-center lg:mt-0 ">© Copyright 2024 All Rights Reserve JobQuest. </p>
     </div>
 </footer>
     );

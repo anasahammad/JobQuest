@@ -78,7 +78,7 @@ export default function TabCategories() {
               value={value}
               onChange={handleChange}
               aria-label="basic tabs example"
-              variant={window.innerWidth <= 328 ? "scrollable" : "standard"}
+              variant={window.innerWidth <= 768 ? "scrollable" : "standard"}
               scrollButtons="auto"
             >
               <Tab label="On-Site Job" {...a11yProps(0)} />
