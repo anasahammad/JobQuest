@@ -16,7 +16,7 @@ const Slider2 = () => {
         transition={{ duration: 1, repeat: Infinity, repeatDelay: 2 }}
         style={{ fontFamily: 'Arial',  }}>
                 
-        <h1 className="text-3xl font-semibold text-white lg:text-5xl">Find Your   <span className="text-blue-400">Dream</span> With JobQuest</h1>
+        <h1 className="text-3xl font-semibold text-white lg:text-5xl">Find Your   <span className="text-blue-400">Dream</span> Job With JobQuest</h1>
                 </motion.h1>
                 
                 <motion.p  initial={{ opacity: 0, y: -10 }}
