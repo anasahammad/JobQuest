@@ -120,14 +120,14 @@ useEffect(()=>{
     return (
         
         <section className="container px-4 mx-auto my-10">
-        <div className="sm:flex sm:items-center sm:justify-between">
-            <h2 className="text-lg font-medium  dark:text-white">All Applied Jobs</h2>
+        <div className="flex flex-col md:flex-row xl:flex-row items-center justify-center md:justify-between xl:justify-between">
+            <h2 className="text-xl font-medium  dark:text-white">All Applied Jobs</h2>
             <select
             onChange={e =>setFilter(e.target.value)}
             value={filter}
               name='category'
               id='category'
-              className='border p-4 rounded-lg'
+              className='border p-2 rounded-lg mt-3'
             >
               <option selected disabled value=''>Filter By Category</option>
               <option value='On Site'>On Site Job</option>
