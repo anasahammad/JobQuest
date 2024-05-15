@@ -61,7 +61,7 @@ const MyJobs = () => {
     }
 
   return (
-    <section className="container px-4 mx-auto">
+    <section className="container px-4 my-16 mx-auto">
       <div className="flex items-center gap-x-3">
         <h2 className="text-lg font-medium  dark:text-white">
           Total Jobs
