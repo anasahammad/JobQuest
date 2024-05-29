@@ -5,7 +5,8 @@ import useAuth from "../hooks/useAuth";
 import { useForm } from "react-hook-form";
 import { updateProfile } from "firebase/auth";
 import Swal from "sweetalert2";
-
+import axios from "axios";
+import { useState } from "react";
 const Register = () => {
     const { createUser} = useAuth()
     const {
@@ -14,17 +15,28 @@ const Register = () => {
         formState: { errors },
       } = useForm()
       const navigate = useNavigate()
+      const [fileName, setFileName] = useState('')
+      const [selectImage, setSelectImage] = useState(null)
 
+      const handleForm = async (data) =>{
+        
+        const {email, password, name} = data;
 
-      const handleForm = data =>{
-        const {email, password, name, photoURL} = data;
-            const user = {name, email, password, photoURL};
+        // const image = data.photo[0]
+        // console.log(image);
+        const formData = new FormData()
+        formData.append('image', selectImage)
+        const response =  await axios.post(`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_KEY}`, formData)
+      
+        const photo = response.data.data.display_url;
+        console.log(photo);
+            const user = {name, email, password, photo};
             console.log(user);
             createUser(email, password)
             .then(result=> {
                 updateProfile(result.user, {
                     displayName: name,
-                    photoURL: photoURL
+                    photoURL: photo
                   })
                   .then(()=>{
                     Swal.fire({
@@ -45,6 +57,18 @@ const Register = () => {
                     footer: '<a href="#">Why do I have this issue?</a>'
                   });
             })
+      }
+
+      const handleImagePreview = (file )=>{
+            if(file){
+
+                setFileName(file.name)
+                setSelectImage(file)
+            }
+            else{
+                setFileName('')
+            }
+        
       }
     return (
         <section className="  container mx-auto dark:bg-gray-900">
@@ -73,15 +97,54 @@ const Register = () => {
                 {errors.name && <span className="text-red-600">This name is required to sign up</span>}
                
                 
-                    <div className="relative flex items-center mt-6">
-                    <span className="absolute">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
-                    </svg>
-                    </span>
-    
-                    <input {...register("photoURL")} type="text" className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Photo URL"/>
-                </div>
+            
+                <div className="relative flex items-center mt-6">
+              <span className="absolute">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
+                  />
+                </svg>
+              </span>
+
+              <input
+  {...register("photo")}
+  type="file"
+  id="fileUpload"
+  name="photo" 
+  className="hidden"
+  accept="image/*" // Allow only image files
+  onChange={e => handleImagePreview(e.target.files[0])}
+/>
+
+              <input
+               
+                type="text"
+                value={fileName}
+                readOnly
+                className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40 cursor-pointer"
+                placeholder="Upload Photo"
+              />
+
+              <label
+                htmlFor="fileUpload"
+                className="ml-2 py-3 text-white bg-blue-500  border rounded-lg px-4 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40 cursor-pointer"
+              >
+                Browse
+              </label>
+            </div>
+
+
+
     
                 <div className="relative flex items-center mt-6">
                     <span className="absolute">
