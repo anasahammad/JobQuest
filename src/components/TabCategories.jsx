@@ -55,7 +55,7 @@ export default function TabCategories() {
   const { isPending, data: jobs } = useQuery({
     queryKey: ["jobs"],
     queryFn: async () => {
-      const res = await axios("https://jobquest-server-pi.vercel.app/jobs");
+      const res = await axios(" http://localhost:5000/jobs");
       return res.data;
     },
   });

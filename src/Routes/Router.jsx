@@ -16,6 +16,9 @@ import JobDetails from "../components/JobDetails";
 import AccessTokenDetails from "../Pages/AccessTokenDetails";
 import Expressjs from "../Pages/Expressjs";
 import NestJS from "../Pages/NestJS";
+import ManageUsers from "../Pages/Admin/ManageUser";
+import HostRoute from "./HostRoute";
+import AdminRoutes from "./AdminRoutes";
 
 
 const router = createBrowserRouter([ 
@@ -31,17 +34,21 @@ const router = createBrowserRouter([
         {
             path: "/all-jobs",
             element: <AllJobs/>,
-            loader: ()=>fetch('https://jobquest-server-pi.vercel.app/counts')
+            loader: ()=>fetch(' http://localhost:5000/counts')
         },
         
         {
             path: "/add-job",
-            element: <PrivateRoutes><AddJob/></PrivateRoutes> 
+            element: <PrivateRoutes>
+                <HostRoute><AddJob/></HostRoute>
+            </PrivateRoutes> 
         }
         ,
         {
             path: "/my-jobs",
-            element: <PrivateRoutes><MyJobs/></PrivateRoutes>
+            element: <PrivateRoutes>
+                <HostRoute><MyJobs/></HostRoute>
+            </PrivateRoutes>
         }
         ,
         {
@@ -57,13 +64,13 @@ const router = createBrowserRouter([
         {
             path: "/details/:id",
             element: <PrivateRoutes><JobDetails/></PrivateRoutes>,
-            loader: ({params})=>fetch(`https://jobquest-server-pi.vercel.app/jobs/${params.id}`)
+            loader: ({params})=>fetch(` http://localhost:5000/jobs/${params.id}`)
         }
         ,
         {
             path: "/update/:id",
             element: <PrivateRoutes><UpdateJob/></PrivateRoutes>,
-            loader: ({params})=>fetch(`https://jobquest-server-pi.vercel.app/job/${params.id}`)
+            loader: ({params})=>fetch(` http://localhost:5000/job/${params.id}`)
         }
         ,
         {
@@ -89,8 +96,15 @@ const router = createBrowserRouter([
         {
             path: "/nest-js",
             element: <NestJS/>
-        }
-        ,
+        },
+         //admin only
+         {
+            path: '/manage-users',
+            element: <PrivateRoutes>
+                <AdminRoutes><ManageUsers/></AdminRoutes>
+            </PrivateRoutes>
+         }
+
         
     ] 
     }, 

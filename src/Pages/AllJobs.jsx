@@ -22,7 +22,7 @@ const AllJobs = () => {
   const { isPending, data: jobs, refetch } = useQuery({
     queryKey: ["jobs", currentPage, itemsPerPage, filter, search],
     queryFn: async () => {
-      const res = await axios(`https://jobquest-server-pi.vercel.app/jobs?page=${currentPage}&size=${itemsPerPage}&filter=${filter}&search=${search}`);
+      const res = await axios(` http://localhost:5000/jobs?page=${currentPage}&size=${itemsPerPage}&filter=${filter}&search=${search}`);
       return res.data;
       
     },

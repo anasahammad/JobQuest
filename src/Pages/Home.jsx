@@ -8,7 +8,7 @@ import Testimonial from "../components/testimonial/Testimonial";
 
 const Home = () => {
     return (
-        <div className="overflow-hidden">
+        <div className="overflow-hidden ">
             <Banner/>
             <TabCategories/>
            <ExploreCategories/>

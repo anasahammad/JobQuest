@@ -23,24 +23,39 @@ const AuthProvider = ({children}) => {
         return signInWithPopup(auth, googleProvider)
     }
     
-   //https://jobquest-server-pi.vercel.app/jwt
+   // http://localhost:5000/jwt
     const signOutUser = ()=>{
         setLoading(true)
         return signOut(auth)
     }
+    
+
+    const saveUser = async user=>{
+        const currentUser = {
+          email: user?.email,
+          role: 'guest',
+          status: 'Verified'
+        }
+    
+        const {data} = await axios.put(' http://localhost:5000/user', currentUser, {withCredentials: true})
+        return data;
+      }
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
             const userEmail = currentUser?.email || user?.email;
             const loggedUser = {email: userEmail}
             setUser(currentUser);
+           
             console.log('current user', currentUser);
             setLoading(false);
             if(currentUser){
-                axios.post('https://jobquest-server-pi.vercel.app/jwt', loggedUser, {withCredentials: true})
-                .then(res=> console.log(res.data))
+                saveUser(currentUser)
+                axios.post(' http://localhost:5000/jwt', loggedUser, {withCredentials: true})
+                .then(res=> {console.log(res.data)})
+
             }
             else{
-                axios.post('https://jobquest-server-pi.vercel.app/logout',loggedUser, {withCredentials:true} )
+                axios.post(' http://localhost:5000/logout',loggedUser, {withCredentials:true} )
                 .then(res=> console.log(res.data))
             }
         });

@@ -9,14 +9,14 @@ const MyJobs = () => {
     const {isPending,data: jobs, refetch} = useQuery({
         queryKey: ['jobs'],
         queryFn: async ()=>{
-            const res = await axios(`https://jobquest-server-pi.vercel.app/jobs/${user?.email}`, {withCredentials: true})
+            const res = await axios(` http://localhost:5000/jobs/${user?.email}`, {withCredentials: true})
             return res.data
         }
     })
     if (isPending) return <div className="flex justify-center items-center min-h-screen"><HashLoader color="#6A38C2" /></div>;
 
     const handleDelete = (id)=>{
-        // axios.delete(`https://jobquest-server-pi.vercel.app/jobs/${id}`)
+        // axios.delete(` http://localhost:5000/jobs/${id}`)
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
               confirmButton: "btn btn-success",
@@ -34,7 +34,7 @@ const MyJobs = () => {
             reverseButtons: true
           }).then((result) => {
             if (result.isConfirmed) {
-              axios.delete(`https://jobquest-server-pi.vercel.app/jobs/${id}`)
+              axios.delete(` http://localhost:5000/jobs/${id}`)
               .then(res=>{
                 if(res.data.deletedCount > 0){
                     refetch()

@@ -1,18 +1,77 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../src/assets/logo.svg"
 import useAuth from "../hooks/useAuth";
 import Swal from "sweetalert2";
 
+import useRole from "../hooks/useRole";
+import { HashLoader } from "react-spinners";
+import HostModal from "../components/HostModal";
+import axios from 'axios'
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false)
     const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+    const [isDropDownOpen, setIsDropDownOpen] = useState(false)
+   const [role, isLoading] = useRole()
     const handleToggleOpen = ()=>{
         setIsOpen(!isOpen)
     } 
  const {user,  signOutUser} = useAuth() || {}
-   
+ const navigate = useNavigate()
+
+
+
+
+ const closeModal = ()=>{
+  setIsDropDownOpen(false)
+}
+const modalHandler = async ()=>{
+  
+  try {
+    const currentUser = {
+      email: user?.email,
+      role: 'guest',
+      status: 'Requested'
+    }
+
+    const {data} = await axios.put(`http://localhost:5000/user`, currentUser)
+    if(data.modifiedCount > 0){
+     
+      // console.log("You become host")
+      Swal.fire({
+        position: "top-center",
+        icon: "success",
+        title: "Success! Wait for admin approval",
+        showConfirmButton: false,
+        timer: 1500
+      });
+     
+    }
+    else{
+     
+      console.log("THere something wrong")
+      Swal.fire({
+        position: "top-center",
+        icon: "success",
+        title: "Please! Wait for admin aproval",
+        showConfirmButton: false,
+        timer: 1500
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    
+    Swal.fire({
+      position: "top-center",
+      icon: "error",
+      title: `error.message`,
+      showConfirmButton: false,
+      timer: 1500
+    });
+  }
+}
+
     
     const handleTheme = (event) => {
         if (event.target.checked) {
@@ -38,6 +97,12 @@ const Navbar = () => {
         const localTheme = localStorage.getItem("theme");
         document.querySelector("html").setAttribute("data-theme", localTheme);
       }, [theme]);
+
+      if (isLoading) return (
+        <div className="flex justify-center items-center min-h-screen">
+          <HashLoader color="#6A38C2" />
+        </div>
+      );
     return (
         <nav  className="relative  shadow">
     <div className="container px-6 py-4 mx-auto lg:flex lg:justify-between lg:items-center">
@@ -51,7 +116,7 @@ const Navbar = () => {
             <div className="flex  lg:hidden">
 
             {
-                user && <div data-tip={user?.displayName} className="mr-2 lg:hidden tooltip tooltip-bottom">
+                user && <div data-tip={user?.displayName} className="mr-2 lg:hidden tooltip tooltip-bottom dropdown">
                 <img alt="" className="w-11 h-11 border cursor-pointer rounded-full dark:bg-gray-500 dark:border-gray-300" src={user?.photoURL} />
                 </div>
             }
@@ -99,14 +164,25 @@ const Navbar = () => {
                
                 
                     
-                
+                <Link to="" className="my-2  transition-colors duration-300 transform lg:hidden dark:text-gray-200 hover:text-[#6A38C2]  md:mx-4 md:my-0">Profile</Link> 
                 
                 {
-                    user?
+                    user? 
                     <>
-                    <Link to="/add-job" className="my-2  transition-colors duration-300 transform dark:text-gray-200 hover:text-[#6A38C2]  md:mx-4 md:my-0">Add A Job</Link>
-                    <Link to="/my-jobs" className="my-2  transition-colors duration-300 transform dark:text-gray-200 hover:text-[#6A38C2]  md:mx-4 md:my-0">My Jobs</Link>
-                    <Link to="/applied-jobs" className="my-2  transition-colors duration-300 transform dark:text-gray-200 hover:text-[#6A38C2]  md:mx-4 md:my-0">Applied Jobs</Link>
+                    {
+                      role === 'host' && (<>
+                       <Link to="/add-job" className="my-2  transition-colors duration-300 transform dark:text-gray-200 hover:text-[#6A38C2]  md:mx-4 md:my-0 lg:hidden">Add A Job</Link>
+                    <Link to="/my-jobs" className="my-2  transition-colors duration-300 transform dark:text-gray-200 hover:text-[#6A38C2]  md:mx-4 md:my-0 lg:hidden">My Jobs</Link>
+                      
+                      </>)
+                    }
+                   { role === 'guest' && (<>
+                    <Link to="/applied-jobs" className="my-2  transition-colors duration-300 transform dark:text-gray-200 hover:text-[#6A38C2]  md:mx-4 md:my-0 lg:hidden">Applied Jobs</Link>
+                   </>)}
+                    {role === 'admin' && (<>
+                      <Link  className="my-2  transition-colors duration-300 transform dark:text-gray-200 hover:text-[#6A38C2]  md:mx-4 md:my-0 lg:hidden">Statistics</Link>
+                      <Link to="/manage-users" className="my-2  transition-colors duration-300 transform dark:text-gray-200 hover:text-[#6A38C2]  md:mx-4 md:my-0 lg:hidden">Manage Users</Link>
+                    </>)}
                     <button onClick={handleSignOut} type="button" className="px-4 py-2 font-semibold border bg-primary text-white rounded  ">Sign Out</button>
                     </>
                     
@@ -116,14 +192,64 @@ const Navbar = () => {
                 }
               
                 
-                
+             
                
                     
             </div>
             {
-                user && <div data-tip={user?.displayName}  className="mr-2 hidden lg:block tooltip tooltip-bottom">
+                user && 
+
+
+                <div className="dropdown dropdown-end">
+          <div tabIndex={0} role="button"  data-tip={user?.displayName}  className="mr-2  hidden lg:block tooltip tooltip-bottom">
                 <img alt="" className="w-11 h-11 border cursor-pointer rounded-full dark:bg-gray-500 dark:border-gray-300" src={user?.photoURL} />
+                
+               
+        
+        <ul tabIndex={0} className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
+              
+          {role === 'guest' && (<>
+            <li>
+            <Link to="/applied-jobs">Applied Jobs</Link>
+            </li> 
+            <li>
+            <Link>
+              <button onClick={()=>setIsDropDownOpen(true)}>Add A job</button>
+            </Link>
+            </li> 
+            <HostModal modalHandler={modalHandler} closeModal={closeModal} isOpen={isDropDownOpen} ></HostModal>
+          </>)}
+
+          {role === 'host' && (<>
+          <li>
+            <Link to="/add-job">Add A Job</Link>
+          </li>
+          <li>
+            <Link to="/my-jobs">My Jobs</Link>
+          </li>
+            
+          </>)}
+
+          { role === 'admin' && (<>
+            <li>
+
+              <Link>Statistics</Link>
+            </li>
+            <li>
+              <Link to="/manage-users">Manage Users</Link>
+            </li>
+          </>)}
+            
+          <li>
+            <Link>Profile</Link>
+          </li>
+        </ul>
+      </div>
+    
                 </div>
+        
+               
+                
             }
             
 
