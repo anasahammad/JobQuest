@@ -9,11 +9,12 @@ const ManageUsers = () => {
     const {data: users = [], isLoading, refetch} = useQuery({
         queryKey: ['users'],
         queryFn: async ()=>{
-            const res = await axios('http://localhost:5000/users')
+            const res = await axios('https://jobquest-server-pi.vercel.app/users')
             return res.data;
         }
     })
 
+    console.log(users);
     if (isLoading) return (
         <div className="flex justify-center items-center min-h-screen">
           <HashLoader color="#6A38C2" />

@@ -35,7 +35,7 @@ const modalHandler = async ()=>{
       status: 'Requested'
     }
 
-    const {data} = await axios.put(`http://localhost:5000/user`, currentUser)
+    const {data} = await axios.put(`https://jobquest-server-pi.vercel.app/user`, currentUser)
     if(data.modifiedCount > 0){
      
       // console.log("You become host")
@@ -233,7 +233,7 @@ const modalHandler = async ()=>{
           { role === 'admin' && (<>
             <li>
 
-              <Link>Statistics</Link>
+              <Link to="/stats">Statistics</Link>
             </li>
             <li>
               <Link to="/manage-users">Manage Users</Link>
@@ -241,7 +241,7 @@ const modalHandler = async ()=>{
           </>)}
             
           <li>
-            <Link>Profile</Link>
+            <Link to="/profile">Profile</Link>
           </li>
         </ul>
       </div>

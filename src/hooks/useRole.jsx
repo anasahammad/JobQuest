@@ -9,7 +9,7 @@ const useRole = () => {
     const {data: role = '', isLoading} = useQuery({
         queryKey: ['users', user?.email],
         queryFn: async ()=>{
-            const {data} = await axios.get(`http://localhost:5000/users/${user?.email}`)
+            const {data} = await axios.get(`https://jobquest-server-pi.vercel.app/users/${user?.email}`)
             return data.role;
 
         }

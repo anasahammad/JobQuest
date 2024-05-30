@@ -18,12 +18,12 @@ const UserDataRow = ({ user, refetch }) => {
 
     const {mutateAsync} = useMutation({
         mutationFn: async  (role)=>{
-            const {data} = await axios.patch(`http://localhost:5000/users/update/${user?.email}`, role)
+            const {data} = await axios.patch(`https://jobquest-server-pi.vercel.app/users/update/${user?.email}`, role)
             return data
         },
         onSuccess: ()=>{
             refetch()
-            // toast.success("Role Updated Successful")
+            
             Swal.fire({
                 position: "top-center",
                 icon: "success",
@@ -52,7 +52,13 @@ const UserDataRow = ({ user, refetch }) => {
         try {
             await mutateAsync(updateRole)
         } catch (error) {
-            // toast.error(error.message)
+          Swal.fire({
+            position: "top-center",
+            icon: "error",
+            title: error.message,
+            showConfirmButton: false,
+            timer: 1500
+          });
         }
     }
   return (

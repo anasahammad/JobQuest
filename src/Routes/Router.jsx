@@ -19,6 +19,8 @@ import NestJS from "../Pages/NestJS";
 import ManageUsers from "../Pages/Admin/ManageUser";
 import HostRoute from "./HostRoute";
 import AdminRoutes from "./AdminRoutes";
+import Profile from "../Pages/Profile/Profile";
+import Statistics from "../Pages/Admin/Statistics";
 
 
 const router = createBrowserRouter([ 
@@ -34,7 +36,7 @@ const router = createBrowserRouter([
         {
             path: "/all-jobs",
             element: <AllJobs/>,
-            loader: ()=>fetch(' http://localhost:5000/counts')
+            loader: ()=>fetch(' https://jobquest-server-pi.vercel.app/counts')
         },
         
         {
@@ -64,13 +66,13 @@ const router = createBrowserRouter([
         {
             path: "/details/:id",
             element: <PrivateRoutes><JobDetails/></PrivateRoutes>,
-            loader: ({params})=>fetch(` http://localhost:5000/jobs/${params.id}`)
+            loader: ({params})=>fetch(` https://jobquest-server-pi.vercel.app/jobs/${params.id}`)
         }
         ,
         {
             path: "/update/:id",
             element: <PrivateRoutes><UpdateJob/></PrivateRoutes>,
-            loader: ({params})=>fetch(` http://localhost:5000/job/${params.id}`)
+            loader: ({params})=>fetch(` https://jobquest-server-pi.vercel.app/job/${params.id}`)
         }
         ,
         {
@@ -97,11 +99,21 @@ const router = createBrowserRouter([
             path: "/nest-js",
             element: <NestJS/>
         },
+        {
+            path: "/profile",
+            element: <Profile/>
+        },
          //admin only
          {
             path: '/manage-users',
             element: <PrivateRoutes>
                 <AdminRoutes><ManageUsers/></AdminRoutes>
+            </PrivateRoutes>
+         },
+         {
+            path: '/stats',
+            element: <PrivateRoutes>
+                <AdminRoutes><Statistics/></AdminRoutes>
             </PrivateRoutes>
          }
 

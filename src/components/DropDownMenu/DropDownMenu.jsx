@@ -27,7 +27,7 @@ const DropDownMenu = () => {
             status: 'Requested'
           }
       
-          const {data} = await axios.put(`http://localhost:5000/user`, currentUser)
+          const {data} = await axios.put(`https://jobquest-server-pi.vercel.app/user`, currentUser)
           if(data.modifiedCount > 0){
             // toast.success("Success! Wait for admin approval")
           }

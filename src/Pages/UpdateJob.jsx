@@ -38,7 +38,7 @@ const UpdateJob = () => {
         }
         
       
-        axios.patch(` http://localhost:5000/job/${_id}`, updateJob )
+        axios.patch(` https://jobquest-server-pi.vercel.app/job/${_id}`, updateJob )
         .then(res=>{
             console.log(res.data);
             Swal.fire({

@@ -1,4 +1,4 @@
-import {  GoogleAuthProvider,  createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
+import {  GoogleAuthProvider,  createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import auth from "../firebase/firebase.config";
 import axios from 'axios'
@@ -23,7 +23,7 @@ const AuthProvider = ({children}) => {
         return signInWithPopup(auth, googleProvider)
     }
     
-   // http://localhost:5000/jwt
+   // https://jobquest-server-pi.vercel.app/jwt
     const signOutUser = ()=>{
         setLoading(true)
         return signOut(auth)
@@ -37,8 +37,15 @@ const AuthProvider = ({children}) => {
           status: 'Verified'
         }
     
-        const {data} = await axios.put(' http://localhost:5000/user', currentUser, {withCredentials: true})
+        const {data} = await axios.put(' https://jobquest-server-pi.vercel.app/user', currentUser, {withCredentials: true})
         return data;
+      }
+
+      const updateUserProfile = (name, photo) => {
+        return updateProfile(auth.currentUser, {
+          displayName: name,
+          photoURL: photo,
+        })
       }
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
@@ -50,12 +57,12 @@ const AuthProvider = ({children}) => {
             setLoading(false);
             if(currentUser){
                 saveUser(currentUser)
-                axios.post(' http://localhost:5000/jwt', loggedUser, {withCredentials: true})
+                axios.post(' https://jobquest-server-pi.vercel.app/jwt', loggedUser, {withCredentials: true})
                 .then(res=> {console.log(res.data)})
 
             }
             else{
-                axios.post(' http://localhost:5000/logout',loggedUser, {withCredentials:true} )
+                axios.post(' https://jobquest-server-pi.vercel.app/logout',loggedUser, {withCredentials:true} )
                 .then(res=> console.log(res.data))
             }
         });
@@ -70,7 +77,8 @@ const AuthProvider = ({children}) => {
         signOutUser,
         user,
         loading,
-        setLoading
+        setLoading,
+        updateUserProfile
     }
     return (
         <AuthContext.Provider value={authInfo}>
